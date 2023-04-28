@@ -46,7 +46,6 @@ public class UpdateSummary : MonoBehaviour
 
     private void DescriptionTextAnimation()
     {
-        descriptionText.text = "Decerection of this " + increaseCount;
         descriptionText.DOFade(1, animationDuration);
     }
 
