@@ -65,12 +65,7 @@ public class PlayerSelectorMenu : MonoBehaviour
     
     public void OnClickInventoryEquireButtonCallback(int index)
     {
-        for(int i = 0; i < listOfInventoryObjects.Count; i++)
-        {
-            index = listOfInventoryObjects[i].GetComponent<InventoryDetails>().InventoryIndex;
-        }
 
-        print("Index of selected abbility " + index);
     }
 
     public void OnOpenInventoryDetailsPenalButtonCallbak()
