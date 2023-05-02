@@ -17,11 +17,6 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
         panelLocation = transform.position;
     }
 
-    private void Update()
-    {
-       
-    }
-
     public void OnDrag(PointerEventData data)
     {
         float difference = data.pressPosition.x - data.position.x;

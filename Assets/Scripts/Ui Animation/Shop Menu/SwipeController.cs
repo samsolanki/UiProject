@@ -1,39 +1,62 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class SwipeController : MonoBehaviour, IDragHandler, IEndDragHandler
+public class SwipeController : MonoBehaviour
 {
-    public float swipeThreshold = 50f;
-    public float swipeSpeed = 10f;
+    [SerializeField] private ScrollRect scrollView;
+    [SerializeField] private int pageCount;
+    [SerializeField] private float gapBetweenImage;
+    [SerializeField] private bool release;
+    [SerializeField] private float targetPos;
+    [SerializeField] private float animationDuration = 0.5f;
+    [SerializeField] private float minThreshold;
 
-    private Vector2 startPosition;
-    private Vector2 endPosition;
+    private int currentPageIndex;
 
-    public void OnDrag(PointerEventData eventData)
+
+    private void Start()
     {
-        // Get the current position of the drag
-        endPosition = eventData.position;
+        gapBetweenImage = 1f / (pageCount - 1f);
+        print("Page count " + pageCount);
+        print(gapBetweenImage);
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    private void Update()
     {
-        // Calculate the distance of the swipe
-        float swipeDistance = Vector2.Distance(startPosition, endPosition);
-
-        // Check if the swipe is above the swipe threshold
-        if (swipeDistance > swipeThreshold)
+        if (release)
         {
-            // Calculate the direction of the swipe
-            Vector2 swipeDirection = (endPosition - startPosition).normalized;
-
-            // Move the image in the direction of the swipe
-            transform.Translate(swipeDirection * swipeSpeed);
+            scrollView.horizontalNormalizedPosition = Mathf.Lerp(scrollView.horizontalNormalizedPosition, targetPos, 0.1f);
         }
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnBeginDrag()
     {
-        // Get the starting position of the drag
-        startPosition = eventData.position;
+        release = false;
     }
+
+
+    public void OnEndDrag()
+    {
+        if(scrollView.velocity.x > minThreshold || targetPos - scrollView.horizontalNormalizedPosition > gapBetweenImage * 0.5f)
+        {
+            if (targetPos > 0f) 
+            {
+                targetPos -= gapBetweenImage;
+                currentPageIndex++;
+            }
+        }else if(scrollView.velocity.x < minThreshold * -1 || scrollView.horizontalNormalizedPosition - targetPos > gapBetweenImage * 0.5f)
+        {
+            if(targetPos < 1f)
+            {
+                targetPos += gapBetweenImage;
+                currentPageIndex--;
+            }
+        }
+
+        scrollView.velocity = Vector2.zero;
+        release = true;
+    }
+
+
+
 }
