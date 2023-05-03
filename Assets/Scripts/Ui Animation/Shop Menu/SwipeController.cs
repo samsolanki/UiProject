@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SwipeController : MonoBehaviour
+public class SwipeControlle : MonoBehaviour
 {
     [SerializeField] private ScrollRect scrollView;
     [SerializeField] private int pageCount;
