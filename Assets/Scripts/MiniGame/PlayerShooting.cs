@@ -32,15 +32,22 @@ public class PlayerShooting : MonoBehaviour
 
     private void FindTarget()
     {
-        for (int i = 0; i < MiniGameManager.instance.GetListOfEnemy().Count; i++)
+
+        if(target == null)
         {
-           
-                float flt_CurrentDistance = Mathf.Abs(Vector3.Distance(transform.position, MiniGameManager.instance
+            if (MiniGameManager.instance.MiniGameSpawener.CanShootingEnemySpawn)
+            {
+                target = MiniGameManager.instance.ActiveShootingEnemy.transform;
+            }
+        }
+
+        /*for (int i = 0; i < MiniGameManager.instance.GetListOfEnemy().Count; i++)
+        {
+            float flt_CurrentDistance = Mathf.Abs(Vector3.Distance(transform.position, MiniGameManager.instance
                     .GetListOfEnemy()[i].transform.position));
             if (target == null)
             {
-                flt_MinDistnce = flt_CurrentDistance;
-                target = MiniGameManager.instance.GetListOfEnemy()[i].transform;
+                i++;
             }
             else if (flt_CurrentDistance<flt_MinDistnce)
             {
@@ -48,7 +55,7 @@ public class PlayerShooting : MonoBehaviour
                 target = MiniGameManager.instance.GetListOfEnemy()[i].transform;
             }
             
-        }
+        }*/
 
         if (target != null)
         {
@@ -74,13 +81,4 @@ public class PlayerShooting : MonoBehaviour
         Vector3 direction = -player.transform.position + target.position;
         bullet.GetComponent<PlayerBullet>().SetDirection(direction + new Vector3(0,1.5f,0));
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("ShootingEnemy"))
-        {
-            Destroy(gameObject);
-        }
-    }
-
 }

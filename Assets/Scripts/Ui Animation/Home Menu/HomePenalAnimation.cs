@@ -37,4 +37,6 @@ public class HomePenalAnimation : MonoBehaviour
             currentIndex = value;
         }
     }
+
+    // public void OnClick_ButtonFunction()
 }

@@ -8,7 +8,6 @@ public class MiniGameManager : MonoBehaviour
 
 
 
-
     [SerializeField] private bool isMiniGameStart = false;
     [SerializeField] private int currentMinigameLevel = 0;
     [SerializeField] private int nextLevelIndex = 20;
@@ -37,16 +36,42 @@ public class MiniGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        minigameRunningTime += Time.deltaTime;
-
-        if(minigameRunningTime >= nextLevelIndex)
+        if (isMiniGameStart)
         {
-            nextLevelIndex += 20;
-            currentMinigameLevel++;
-            obstacleSpawner.CheckLevel = false; 
+            minigameRunningTime += Time.deltaTime;
+
+            if (minigameRunningTime >= nextLevelIndex)
+            {
+                nextLevelIndex += 20;
+                currentMinigameLevel++;
+                obstacleSpawner.CheckLevel = false;
+            }
         }
     }
+    public void AddEnemyInList(GameObject _Currentenemy)
+    {
+        list_ActiveEnemy.Add(_Currentenemy);
+    }
+    public void RemoveEnemyInList(GameObject _Currentenemy)
+    {
+        list_ActiveEnemy.Remove(_Currentenemy);
+    }
+    public List<GameObject> GetListOfEnemy()
+    {
+        return list_ActiveEnemy;
+    }
 
+    public bool IsMiniGameStart
+    {
+        get
+        {
+            return isMiniGameStart;
+        }
+        set
+        {
+            isMiniGameStart = value;
+        }
+    }
 
     public int CurrentMinigameLevel
     {
@@ -56,6 +81,13 @@ public class MiniGameManager : MonoBehaviour
         }
     }
 
+    public MiniGameObstaclesSpawner MiniGameSpawener
+    {
+        get
+        {
+            return obstacleSpawner;
+        }
+    }
 
     public float ObstacleMoveSpeed
     {
@@ -65,16 +97,14 @@ public class MiniGameManager : MonoBehaviour
         }
     }
 
-    public void  AddEnemyInList(GameObject _Currentenemy)
+
+    public GameObject ActiveShootingEnemy
     {
-        list_ActiveEnemy.Add(_Currentenemy);
+        get
+        {
+            return obstacleSpawner.ShootingEnemy;
+        }
     }
-    public void RemoveEnemyInList(GameObject _Currentenemy)
-    {
-        list_ActiveEnemy.Remove(_Currentenemy);
-    }
-    public  List<GameObject > GetListOfEnemy()
-    {
-        return list_ActiveEnemy;
-    } 
+
+   
 }

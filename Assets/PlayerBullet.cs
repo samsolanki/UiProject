@@ -23,4 +23,14 @@ public class PlayerBullet : MonoBehaviour
     {
         transform.Translate(direction.normalized * flt_MovementSpeed * Time.deltaTime);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ShootingEnemy"))
+        {
+            Destroy(this.gameObject);
+            Destroy(other.GetComponentInParent<MiniGameShootingEnemy>().gameObject);
+            MiniGameManager.instance.MiniGameSpawener.CanShootingEnemySpawn = false;
+        }
+    }
 }

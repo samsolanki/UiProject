@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 6102112978777801969}
   - component: {fileID: 6102112978779129041}
   - component: {fileID: 6102112978780227089}
-  - component: {fileID: 6005024899410087216}
+  - component: {fileID: 529196628}
   - component: {fileID: -4540195157391605440}
   m_Layer: 0
   m_Name: Rock_01 4
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6102112978778036433}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
@@ -85,20 +85,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6005024899410087216
-MeshCollider:
+--- !u!65 &529196628
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6102112978778036433}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: e9089b1db16b58f4282a94e020b9c0e8, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.85556585, y: 0.5345735, z: 0.8734082}
+  m_Center: {x: -0.01697725, y: 0.028850526, z: 0.004005462}
 --- !u!114 &-4540195157391605440
 MonoBehaviour:
   m_ObjectHideFlags: 0

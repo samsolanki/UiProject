@@ -6,34 +6,51 @@ public class MiniGameObstaclesSpawner : MonoBehaviour
 {
 
     [SerializeField] private GameObject[] allObstacles; // ARRAY OF ALL OBSTACLES IN MINIGAMES
-    [SerializeField] private float timeBetweenSpawn ; // TIME GAP BETWEEN ONE OBSTACLE SPAWN TO SECOND OBSTACL SPWAN
+    [SerializeField] private GameObject shootingEnemyPrefab;
+    [SerializeField] private bool canShootingEnemySpawn = false;
+    [SerializeField] private float timeBetweenSpawnObstacle ; // TIME GAP BETWEEN ONE OBSTACLE SPAWN TO SECOND OBSTACL SPWAN
+    [SerializeField] private float timeBetweenSpawnEnemy ; // TIME GAP BETWEEN ONE OBSTACLE SPAWN TO SECOND OBSTACL SPWAN
     [SerializeField] private float minSpawnPos, maxSpawnPos; // MAX AND MIN POSITION IN X AXIS AND Z AXIS OBSTACLE SPAWN
     [SerializeField] private float obstacleMoveSpeed;
 
-    private float currentTimeBetweenSpawn;
+    private float currentTimeBetweenSpawnObstacle;
+    private float currentTimeBetweenSpawnEnemy;
     private bool canSpawn;
     private bool checkLevel = false;
     GameObject obstacle;
+    GameObject shootingEnemy;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentTimeBetweenSpawn = timeBetweenSpawn;
+        currentTimeBetweenSpawnObstacle = timeBetweenSpawnObstacle;
+        currentTimeBetweenSpawnEnemy = timeBetweenSpawnEnemy;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-
-        SetDifficulityLevel();
-        currentTimeBetweenSpawn += Time.deltaTime;
-
-        if(currentTimeBetweenSpawn >= timeBetweenSpawn)
+        if (MiniGameManager.instance.IsMiniGameStart)
         {
-            SpawnObstacle();
-            currentTimeBetweenSpawn = 0;
+            SetDifficulityLevel();
+            currentTimeBetweenSpawnObstacle += Time.deltaTime;
+
+            if (currentTimeBetweenSpawnObstacle >= timeBetweenSpawnObstacle)
+            {
+                SpawnObstacle();
+                currentTimeBetweenSpawnObstacle = 0;
+            }
+
+            currentTimeBetweenSpawnEnemy += Time.deltaTime;
+
+            if (currentTimeBetweenSpawnEnemy >= timeBetweenSpawnEnemy)
+            {
+                SpawnEnemy();
+                currentTimeBetweenSpawnEnemy = 0;
+            }
         }
+
     }
 
     private void SetDifficulityLevel()
@@ -41,20 +58,17 @@ public class MiniGameObstaclesSpawner : MonoBehaviour
         if(MiniGameManager.instance.CurrentMinigameLevel == 0 && !checkLevel)
         {
             checkLevel = true;
-            print("level 0");
         }
         else if(MiniGameManager.instance.CurrentMinigameLevel == 1 && !checkLevel)
         {
             checkLevel = true;
-            print("Level 1");
-            timeBetweenSpawn -= 1.5f;
+            timeBetweenSpawnObstacle -= 1.5f;
             obstacleMoveSpeed += 5;
         }
         else if (MiniGameManager.instance.CurrentMinigameLevel == 2 && !checkLevel)
         {
             checkLevel = true;
-            print("Level 2");
-            timeBetweenSpawn -= 1f;
+            timeBetweenSpawnObstacle -= 1f;
             obstacleMoveSpeed += 5;
         }
     }
@@ -67,13 +81,20 @@ public class MiniGameObstaclesSpawner : MonoBehaviour
         int randomIndex = Random.Range(0, allObstacles.Length);
         
         obstacle = Instantiate(allObstacles[randomIndex], transform.position + new Vector3(randomPosX , 0 ,randomPosZ), Quaternion.Euler(0,-90,0));
-
-        if(obstacle.GetComponent<MiniGameObstacle>().enemyType == EnemyType.shootingEnemy)
-        {
-            MiniGameManager.instance.AddEnemyInList(obstacle);
-        }
-
     }
+
+    private void SpawnEnemy()
+    {
+        float randomPosX = Random.Range(minSpawnPos, maxSpawnPos);
+        float randomPosZ = Random.Range(minSpawnPos, maxSpawnPos);
+
+        if (!canShootingEnemySpawn)
+        {
+            shootingEnemy = Instantiate(shootingEnemyPrefab, transform.position + new Vector3(randomPosX, 0, randomPosZ), Quaternion.Euler(0, -90, 0));
+            canShootingEnemySpawn = true;
+        }
+    }
+
 
     public bool CheckLevel
     {
@@ -88,6 +109,27 @@ public class MiniGameObstaclesSpawner : MonoBehaviour
         get
         {
             return obstacleMoveSpeed;
+        }
+    }
+
+
+    public bool CanShootingEnemySpawn
+    {
+        get
+        {
+            return canShootingEnemySpawn;
+        }
+        set
+        {
+            canShootingEnemySpawn = value;
+        }
+    }
+
+    public GameObject ShootingEnemy
+    {
+        get
+        {
+            return shootingEnemy;
         }
     }
 }
