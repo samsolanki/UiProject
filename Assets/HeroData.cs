@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroData 
+public class HeroData : MonoBehaviour
 {
     // profile
+    public int heroID;
     public string str_HeroName;
     public int currentLevel;
     public int all_UpgradePrices;

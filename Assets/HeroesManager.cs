@@ -15,6 +15,12 @@ public class HeroesManager : MonoBehaviour
 
     // GETTER FOR PROFILE
 
+
+    public int GetHeroId(int _heroIndex)
+    {
+        return all_HeroData[_heroIndex].heroID;
+    }
+
     public int GetHeroLevel(int _heroIndex)
     {
         return all_HeroData[_heroIndex].currentLevel;
@@ -25,6 +31,10 @@ public class HeroesManager : MonoBehaviour
         return all_HeroData[_heroIndex].str_HeroName;
     }
 
+    public string GetHeroDese()
+    {
+        return null;
+    }
 
     //GETTER FOR STATES
 
