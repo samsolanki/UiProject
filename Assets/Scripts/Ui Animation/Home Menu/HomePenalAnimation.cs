@@ -4,43 +4,32 @@ using UnityEngine;
 
 public class HomePenalAnimation : MonoBehaviour
 {
-    [SerializeField] private GameObject go_trainingPenal;
+    [SerializeField] private GameObject go_ExpaditionPanel;
+    [SerializeField] private GameObject go_ExpaditionPanelWithAds;
     [SerializeField] private GameObject go_SettingPenal;
     [SerializeField] private GameObject go_DailyRewardPanel;
     [SerializeField] private GameObject go_DailyMissionPanel;
 
 
-    private int currentIndex;
-
-
-    public int GetCurrentIndex
+  
+    public void OnClick_ExpaditionPanelButtonOpen()
     {
-        get
-        {
-            return currentIndex;
-        }
-        set
-        {
-            currentIndex = value;
-        }
+        go_ExpaditionPanel.SetActive(true);
+    }
+    public void OnClick_ExpaditionPanelClose()
+    {
+        go_ExpaditionPanel.SetActive(false);
     }
 
-    public void OnClick_TranningPanelButtonOpen1(int index)
+    public void OnClick_ExpaditionPanelWithAdsButtonOpen()
     {
-        currentIndex = index;
-        go_trainingPenal.SetActive(true);
+        go_ExpaditionPanelWithAds.SetActive(true);
+    }
+    public void OnClick_ExpaditionPanelWithAdsButtonClose()
+    {
+        go_ExpaditionPanelWithAds.SetActive(false);
     }
 
-    public void OnClick_TranningPanelButtonOpen2(int index)
-    {
-        currentIndex = index;
-        go_trainingPenal.SetActive(true);
-    }
-
-    public void OnClick_TranningPanelClose()
-    {
-        go_trainingPenal.SetActive(false);
-    }
 
     public void OnClick_StartGame()
     {

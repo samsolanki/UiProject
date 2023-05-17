@@ -8,7 +8,7 @@ public class UiDailyRewardPenal : MonoBehaviour
 {
 
     [SerializeField] private Button[] allDaysRewardButtons;
-
+    [SerializeField] private Sprite rewardClimedSprite;
 
     private int index = 0;
 
@@ -24,10 +24,6 @@ public class UiDailyRewardPenal : MonoBehaviour
         
     }
 
-    private void Update()
-    {
-        
-    }
 
     public void OnClick_ActiveNextRewardButton(int _buttonIndex)
     {
@@ -46,6 +42,7 @@ public class UiDailyRewardPenal : MonoBehaviour
 
             UiManager.instance.rewardSummaryPanel.SetRewardSummaryData(rewardIcon.sprite , rewardAmount);
             UiManager.instance.rewardSummaryPanel.gameObject.SetActive(true);
+            rewardIcon.sprite = rewardClimedSprite;
             index++;
             allDaysRewardButtons[index].interactable = true;
         }
