@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class HomePenalAnimation : MonoBehaviour
+public class HomeUI : MonoBehaviour
 {
     [SerializeField] private GameObject go_ExpaditionPanel;
     [SerializeField] private GameObject go_ExpaditionPanelWithAds;
     [SerializeField] private GameObject go_SettingPenal;
     [SerializeField] private GameObject go_DailyRewardPanel;
     [SerializeField] private GameObject go_DailyMissionPanel;
+
+
+    
 
 
   

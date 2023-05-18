@@ -7,7 +7,9 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
 
 
-    public RewardSummaryPanel rewardSummaryPanel;
+    public HomeUI homeUi;
+    public SettingUI settingUI;
+    public RewardSummaryUI rewardSummaryUI;
 
 
     [SerializeField] private bool canChangeMenus;

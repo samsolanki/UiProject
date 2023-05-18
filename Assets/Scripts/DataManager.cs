@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DataManager : MonoBehaviour
 {
 
     public static DataManager instance;
+
+
+    public bool[] all_ExpeditionRunningStatus;
+
+    public bool isSoundTurnOn;
+    public bool isMusicTurnOn;
+    public bool isHighGraphicsTurnOn;
 
 
     public int playerLevel;
@@ -24,15 +32,11 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        //isSoundTurnOn = UiManager.instance.settingUI.SoundToggleButton;
+        //isMusicTurnOn = UiManager.instance.settingUI.MusicToggleButton;
+        //isHighGraphicsTurnOn = UiManager.instance.settingUI.GraphicsToggleButton;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
