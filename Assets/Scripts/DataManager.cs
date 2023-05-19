@@ -9,14 +9,19 @@ public class DataManager : MonoBehaviour
     public static DataManager instance;
 
 
-    public bool[] all_ExpeditionRunningStatus;
 
+ 
+
+    public int playerLevel;
+
+    [Header("Settings")]
     public bool isSoundTurnOn;
     public bool isMusicTurnOn;
     public bool isHighGraphicsTurnOn;
 
-
-    public int playerLevel;
+    [Header("Expedition")]
+    public bool[] all_ExpeditionRunningStatus;
+    public int expeditionOneIndex = 0;
 
 
     private void OnEnable()
@@ -39,4 +44,8 @@ public class DataManager : MonoBehaviour
         //isHighGraphicsTurnOn = UiManager.instance.settingUI.GraphicsToggleButton;
     }
 
+    private void Update()
+    {
+        //UiManager.instance.homeUi.CheckExpeditionState();
+    }
 }

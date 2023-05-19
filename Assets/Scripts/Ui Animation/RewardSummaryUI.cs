@@ -18,6 +18,7 @@ public class RewardSummaryUI : MonoBehaviour
         allRewardIcons[0].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _rewardAmount.ToString();
     }
 
+
     public void SetMultiplRewardSummaryData(List<Sprite> allRewardSprite , List<string> allRewardAmount)
     {
         for(int i =0; i < allRewardSprite.Count; i++)
@@ -32,6 +33,10 @@ public class RewardSummaryUI : MonoBehaviour
     public void OnClick_ClaimRewardButton()
     {
         this.gameObject.SetActive(false);
+        for (int i = 0; i < allRewardIcons.Length; i++)
+        {
+            allRewardIcons[i].gameObject.SetActive(false);
+        }
     }
 
 }

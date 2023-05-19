@@ -12,6 +12,11 @@ public class DailyRewardUI : MonoBehaviour
 
     private int index = 0;
 
+    private List<Sprite> sprites = new List<Sprite>();
+    private List<string> strings = new List<string>();
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +28,12 @@ public class DailyRewardUI : MonoBehaviour
         
     }
 
+
+    public void ClearList()
+    {
+        sprites.Clear();
+        strings.Clear();
+    }
 
     public void OnClick_ActiveNextRewardButton(int _buttonIndex)
     {
@@ -40,8 +51,7 @@ public class DailyRewardUI : MonoBehaviour
             {
                 int childCount = allDaysRewardButtons[index].transform.GetChild(0).transform.childCount;
                 print(childCount);
-                List<Sprite> sprites = new List<Sprite>();
-                List<string> strings = new List<string>();
+               
                 for (int i =0; i < childCount; i++)
                 {
 

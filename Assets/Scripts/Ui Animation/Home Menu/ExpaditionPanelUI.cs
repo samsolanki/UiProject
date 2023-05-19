@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ExpaditionPanelUI : MonoBehaviour
 {
@@ -10,109 +11,96 @@ public class ExpaditionPanelUI : MonoBehaviour
     [SerializeField] private ExpaditionReward rewardData;
 
     [SerializeField] private GameObject go_ExpaditionScreen;
-    [SerializeField] private ExpanditionProcessingData go_ExpaditionTimerScreen;
+    [SerializeField] private ExpeditionRunningUI expeditionRunningUI;
 
-    [SerializeField] private bool isExpaditionStarted;
+
+    [Header("Reward Data of Expedition Screen")]
+
+    public ExpaditionRewardData[] all_ExpeditionRewardOneData;
+    public ExpaditionRewardData[] all_ExpeditionRewardTwoData;
+
+
+    private int levelMultiplier = 100;
 
     public bool whenCompleteAndTouch1;
     public bool whenCompleteAndTouch2;
 
 
-    public bool doNotStartExpaditionAtFirstLoad1;
-    public bool doNotStartExpaditionAtFirstLoad2;
-
-    public int currentIndex;
 
     private void OnEnable()
     {
-        //if (DataManager.instance.isExpaditionStarted1)
-        //{
-        //    go_ExpaditionTimerScreen.gameObject.SetActive(true);
-        //}
-        //else
-        //{
-        //    go_ExpaditionTimerScreen.gameObject.SetActive(false);
-        //}
 
-        //if (DataManager.instance.isExpaditionStarted2)
-        //{
-        //    go_ExpaditionTimerScreen.gameObject.SetActive(true);
+        //sChechWhichExpeditionStateInRunning();
 
-        //}
-        //else
-        //{
-        //    go_ExpaditionTimerScreen.gameObject.SetActive(false);
-        //}
+        //SET ALL DATA IN THE EXPEDITION ONE SCREEN
+
+        SetExpeditionData();
     }
 
-    public ExpanditionProcessingData ExpanditionProcessingData
+
+
+    //private void ChechWhichExpeditionStateInRunning()
+    //{
+    //    // check which screen to activate
+    //    if (UiManager.instance.homeUi.expeditionState == ExpeditionState.running)
+    //    {
+    //        go_ExpaditionTimerScreen.gameObject.SetActive(true);
+    //        go_ExpaditionScreen.SetActive(false);
+    //    }
+    //    else
+    //    {
+    //        go_ExpaditionTimerScreen.gameObject.SetActive(false);
+    //        go_ExpaditionScreen.SetActive(true);
+    //    }
+    //}
+
+
+    private void SetExpeditionData()
     {
-        get
+        //int rewardToAddInEachSlot = DataManager.instance.playerLevel * levelMultiplier;
+        for (int i = 0; i < all_ExpeditionRewardOneData.Length; i++)
         {
-            return go_ExpaditionTimerScreen;
+            TextMeshProUGUI rewardText1 = all_ExpeditionRewardOneData[i].rewardText1;
+            TextMeshProUGUI rewardText2 = all_ExpeditionRewardOneData[i].rewardText2;
+
+            rewardText1.text = (rewardData.allFirstRewardAmounts[i]).ToString();
+            rewardText2.text = (rewardData.allSecondRewardAmounts[i]).ToString();
+        }
+
+        //SET ALL DATA IN THE EXPEDITION TWO SCREEN
+
+        for (int i = 0; i < all_ExpeditionRewardTwoData.Length; i++)
+        {
+            TextMeshProUGUI rewardText1 = all_ExpeditionRewardTwoData[i].rewardText1;
+            TextMeshProUGUI rewardText2 = all_ExpeditionRewardTwoData[i].rewardText2;
+
+            rewardText1.text = (rewardData.allFirstRewardAmounts[i]).ToString();
+            rewardText2.text = (rewardData.allSecondRewardAmounts[i]).ToString();
         }
     }
 
 
+
     public void OnClick_ExpaditionActive(int _Index)
     {
-            //DataManager.instance.isExpaditionStarted1 = true;
-            go_ExpaditionTimerScreen.gameObject.SetActive(true);
-            for (int i = 0; i < rewardData.all_ExpaditionRewardData.Length; i++)
-            {
-                if (i == _Index)
-                {
-                    Sprite reward1Icon = rewardData.all_ExpaditionRewardData[i].img_RewardIcon1.sprite;
-                    Sprite reward2Icon = rewardData.all_ExpaditionRewardData[i].img_RewardIcon2.sprite;
+        print("Runnig State");
+        UiManager.instance.homeUi.expeditionState = ExpeditionState.running;
+        UiManager.instance.homeUi.CheckExpeditionState();
+        DataManager.instance.all_ExpeditionRunningStatus[0] = true;
+        DataManager.instance.expeditionOneIndex = _Index;
 
-                    string reward1Amount = rewardData.all_ExpaditionRewardData[i].rewardText1.text;
-                    string reward2Amount = rewardData.all_ExpaditionRewardData[i].rewardText2.text;
+        expeditionRunningUI.gameObject.SetActive(true);
 
-                    go_ExpaditionTimerScreen.SetExpaditionProcessingData(reward1Icon, reward1Amount, reward2Icon, reward2Amount);
-                }
-            }
-        
+
+        expeditionRunningUI.SetExpeditionRunningData();
+        //go_ExpaditionTimerScreen.SetExpaditionProcessingData(reward1Icon, reward1Amount, reward2Icon, reward2Amount);
+
     }
-
-    public void OnClick_AdsExpaditionActive(int _Index)
-    {
-            //DataManager.instance.isExpaditionStarted2 = true;
-            go_ExpaditionTimerScreen.gameObject.SetActive(true);
-            for (int i = 0; i < rewardData.all_AdsExpaditionRewardData.Length; i++)
-            {
-                if (i == _Index)
-                {
-                    Sprite reward1Icon = rewardData.all_AdsExpaditionRewardData[i].img_RewardIcon1.sprite;
-                    Sprite reward2Icon = rewardData.all_AdsExpaditionRewardData[i].img_RewardIcon2.sprite;
-
-                    string reward1Amount = rewardData.all_AdsExpaditionRewardData[i].rewardText1.text;
-                    string reward2Amount = rewardData.all_AdsExpaditionRewardData[i].rewardText2.text;
-
-                    go_ExpaditionTimerScreen.SetExpaditionProcessingData(reward1Icon, reward1Amount, reward2Icon, reward2Amount);
-                }
-            }
-    }
-
 
     public void OnClick_ExpaditionScreenClose()
     {
-        go_ExpaditionTimerScreen.gameObject.SetActive(false);
+        //expeditionRunningUI.gameObject.SetActive(false);
     }
 
-    public void OnClick_FinishExpadition()
-    {
-        doNotStartExpaditionAtFirstLoad1 = true;
-        go_ExpaditionTimerScreen.gameObject.SetActive(false);
-        go_ExpaditionScreen.SetActive(true);
-        //DataManager.instance.isExpaditionStarted1 = false;
-    }
-
-    public void OnClick_FinishExpadition2()
-    {
-        doNotStartExpaditionAtFirstLoad2 = true;
-        go_ExpaditionTimerScreen.gameObject.SetActive(false);
-        go_ExpaditionScreen.SetActive(true);
-        //DataManager.instance.isExpaditionStarted2 = false;
-    }
 
 }
