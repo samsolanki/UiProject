@@ -10,7 +10,7 @@ public class RewardSummaryUI : MonoBehaviour
     [SerializeField] private Image[] allRewardIcons;
     [SerializeField] private TextMeshProUGUI rewardAmountText;
 
-
+    //IF THERE IS ONLY ONE REWARD CALL THAT FUNCTION
     public void SetRewardSummaryData(Sprite _rewardIcon , string _rewardAmount)
     {
         allRewardIcons[0].gameObject.SetActive(true);
@@ -19,6 +19,7 @@ public class RewardSummaryUI : MonoBehaviour
     }
 
 
+    //IF THERE IS MULTIPLE REWARD CALL THAT FUNCTION
     public void SetMultiplRewardSummaryData(List<Sprite> allRewardSprite , List<string> allRewardAmount)
     {
         for(int i =0; i < allRewardSprite.Count; i++)
@@ -30,6 +31,9 @@ public class RewardSummaryUI : MonoBehaviour
         }
     }
 
+
+    #region Reward Claim Button
+
     public void OnClick_ClaimRewardButton()
     {
         this.gameObject.SetActive(false);
@@ -38,5 +42,7 @@ public class RewardSummaryUI : MonoBehaviour
             allRewardIcons[i].gameObject.SetActive(false);
         }
     }
+
+    #endregion
 
 }

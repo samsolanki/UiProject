@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerSelectionUI : MonoBehaviour
+public class HeroSelectionUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txt_HeroName;
     [SerializeField] private GameObject[] allHeros;

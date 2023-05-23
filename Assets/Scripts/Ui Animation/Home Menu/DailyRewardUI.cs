@@ -6,7 +6,7 @@ using TMPro;
 
 public class DailyRewardUI : MonoBehaviour
 {
-
+    [Header ("Daily Reward Data")]
     [SerializeField] private Button[] allDaysRewardButtons;
     [SerializeField] private Sprite rewardClimedSprite;
 

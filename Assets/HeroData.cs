@@ -6,6 +6,7 @@ public class HeroData : MonoBehaviour
 {
     // profile
     public int heroID;
+    public GameObject heroMode;
     public string str_HeroName;
     public int currentLevel;
     public int all_UpgradePrices;

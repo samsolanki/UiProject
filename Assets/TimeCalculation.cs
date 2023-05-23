@@ -6,15 +6,17 @@ public class TimeCalculation : MonoBehaviour
 {
     public static TimeCalculation instance;
 
+    [Header("Expedition One")]
 
     public float expeditionOneTimer = 30f;
 
-
-    public float hours;
-    public float minutes;
-    public float seconds;
-
     public float currentExpeditionOneTimer;
+
+    [Header("Expedition Two")]
+    public float expeditionTwoTimer = 30f;
+
+    public float currentExpeditionTwoTimer;
+
 
 
     private void Awake()
@@ -31,9 +33,13 @@ public class TimeCalculation : MonoBehaviour
     {
         if (DataManager.instance.all_ExpeditionRunningStatus[0])
         {
-            print("Method Called");
             CalcuateExpeditionOneTime();
-        }        
+        }
+
+        if (DataManager.instance.all_ExpeditionRunningStatus[1])
+        {
+            CalcuateExpeditionTwoTime();
+        }
     }
 
     private void CalcuateExpeditionOneTime()
@@ -43,15 +49,36 @@ public class TimeCalculation : MonoBehaviour
         if(currentExpeditionOneTimer <= 0)
         {
             currentExpeditionOneTimer = expeditionOneTimer;
-            UiManager.instance.homeUi.CompleteExpadition();
+            UiManager.instance.homeUi.CompleteExpaditionOne();
 
         }
         UiManager.instance.homeUi.ExpeditionOneTimer(currentExpeditionOneTimer);
     }
-    
     public void ResetExpeditionOneTimer()
     {
         currentExpeditionOneTimer = expeditionOneTimer;
+    }
+
+
+
+
+
+    private void CalcuateExpeditionTwoTime()
+    {
+        currentExpeditionTwoTimer -= Time.deltaTime;
+
+        if (currentExpeditionTwoTimer <= 0)
+        {
+            currentExpeditionTwoTimer = expeditionOneTimer;
+            UiManager.instance.homeUi.CompleteExpeditionTwo();
+
+        }
+        UiManager.instance.homeUi.ExpeditionTwoTimer(currentExpeditionTwoTimer);
+    }
+    
+    public void ResetExpeditionTwoTimer()
+    {
+        currentExpeditionTwoTimer = expeditionTwoTimer;
     }
 
 }

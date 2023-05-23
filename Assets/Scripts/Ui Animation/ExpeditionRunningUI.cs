@@ -6,88 +6,113 @@ using TMPro;
 
 public class ExpeditionRunningUI : MonoBehaviour
 {
-
-    [SerializeField] private int expeditionIndex;
-
+    
+    [Header("Require Scripts")]
     [SerializeField] private ExpaditionReward rewardData;
-    [SerializeField] private GameObject go_ExpaditionScreen;
 
+    [Header("Expedition Data")]
+    [SerializeField] private int expeditionIndex;
+    [SerializeField] private ExpeditionPanelUI expaditionScreen;
     public TextMeshProUGUI txt_expanditionTimer;
     public Slider slider_ExpanditionSlider;
 
-    [SerializeField] private Image icon_Expedition;
-
     [Header("Reward 1 Data")]
+    [SerializeField] private Image icon_ExpeditionRewardOne;
     [SerializeField] private TextMeshProUGUI rewardAmount1;
 
     [Header("Reward 2 Data")]
+    [SerializeField] private Image icon_ExpeditionRewardTwo;
     [SerializeField] private TextMeshProUGUI rewardAmount2;
 
 
     private void Start()
     {
-        SetSliderMaxValue();
+        if(expaditionScreen.myPanelId == 0)
+        {
+            SetExpeditionOneSliderMaxValue();
+        }else if(expaditionScreen.myPanelId == 1)
+        {
+            SetExpeditionTwoSliderMaxValue();
+        }
     }
 
 
-    private void SetSliderMaxValue()
+    private void SetExpeditionOneSliderMaxValue()
     {
         slider_ExpanditionSlider.maxValue = TimeCalculation.instance.expeditionOneTimer;
+        slider_ExpanditionSlider.value = TimeCalculation.instance.expeditionOneTimer;
     }
 
+    private void SetExpeditionTwoSliderMaxValue()
+    {
+        slider_ExpanditionSlider.maxValue = TimeCalculation.instance.expeditionTwoTimer;
+        slider_ExpanditionSlider.value = TimeCalculation.instance.expeditionTwoTimer;
+    }
 
-    //public void SetExpaditionProcessingData(Sprite _reward1Sprite , string _reward1Amount , Sprite _reward2Sprite , string _reward2Amount)
-    //{
-    //    rewardIcon1.sprite = _reward1Sprite;
-    //    rewardAmount1.text = _reward1Amount;
-
-    //    rewardIcon2.sprite = _reward2Sprite;
-    //    rewardAmount2.text = _reward2Amount;
-    //}
 
     public void SetExpeditionRunningData()
     {
-        icon_Expedition.sprite = rewardData.all_IconSprites[DataManager.instance.expeditionOneIndex];
-        rewardAmount1.text = rewardData.allFirstRewardAmounts[DataManager.instance.expeditionOneIndex].ToString();
-        rewardAmount2.text = rewardData.allSecondRewardAmounts[DataManager.instance.expeditionOneIndex].ToString();
-
-        //rewardIcon2.sprite = rewardData.all_IconSprites[DataManager.instance.expeditionOneIndex];
+        icon_ExpeditionRewardOne.sprite = rewardData.all_ExpeditionOneIconSprites[DataManager.instance.expeditionOneIndex];
+        icon_ExpeditionRewardTwo.sprite = rewardData.all_ExpeditionOneIconSprites[DataManager.instance.expeditionOneIndex];
+        rewardAmount1.text = rewardData.allExpeditionOneFirstRewardAmounts[DataManager.instance.expeditionOneIndex].ToString();
+        rewardAmount2.text = rewardData.allExpeditionOneSecondRewardAmounts[DataManager.instance.expeditionOneIndex].ToString();
     }
 
+    public void SetExpeditionTwoRunningData()
+    {
+        icon_ExpeditionRewardOne.sprite = rewardData.all_ExpeditionTwoIconSprites[DataManager.instance.expeditionOneIndex];
+        icon_ExpeditionRewardTwo.sprite = rewardData.all_ExpeditionTwoIconSprites[DataManager.instance.expeditionOneIndex];
+        rewardAmount1.text = rewardData.allExpeditionOneFirstRewardAmounts[DataManager.instance.expeditionOneIndex].ToString();
+        rewardAmount2.text = rewardData.allExpeditionOneSecondRewardAmounts[DataManager.instance.expeditionOneIndex].ToString();
+    }
 
     public void ExpeditionOneTimer(string _timeLeftInString, float _timeLeft)
     {
         slider_ExpanditionSlider.value = _timeLeft;
 
         txt_expanditionTimer.text = _timeLeftInString;
+    }
 
-        //float hours = _timeLeft / 3600;
-        //float minutes = (_timeLeft % 3600) / 60;
-        //float seconds = _timeLeft % 60;
-
-
-        //if (_timeLeft < 60)
-        //{
-        //    txt_expanditionTimer.text = seconds.ToString("F0") + "S";
-        //}
-        //else if (_timeLeft < 3600)
-        //{
-        //    txt_expanditionTimer.text = minutes.ToString("F0") + "M :" + seconds.ToString("F0") + "S ";
-        //}
-        //else if (_timeLeft > 3600)
-        //{
-        //    txt_expanditionTimer.text = hours.ToString("F0") + "H :" + minutes.ToString("F0") + "M :" + seconds.ToString("F0") + "S ";
-        //}
+    public void ExpeditionTwoTimer(string _timeLeftInString, float _timeLeft)
+    {
+        print("Called first Function");
+        slider_ExpanditionSlider.value = _timeLeft;
+        txt_expanditionTimer.text = _timeLeftInString;
     }
 
 
-    public void OnClick_FinishExpadition()
+
+
+    public void OnClick_CloseExpeditionRunningScreen()
     {
-        UiManager.instance.homeUi.CompleteExpadition();
         this.gameObject.SetActive(false);
-        go_ExpaditionScreen.SetActive(true);
+    }
+
+
+    #region Expedition One Finish Button
+
+    public void OnClick_FinishExpeditionOne()
+    {
+        UiManager.instance.homeUi.CompleteExpaditionOne();
+        this.gameObject.SetActive(false);
+        expaditionScreen.gameObject.SetActive(false);
         DataManager.instance.all_ExpeditionRunningStatus[0] = false;
         TimeCalculation.instance.ResetExpeditionOneTimer();
     }
 
+    #endregion
+
+
+    #region Expedition Two Finish Button
+
+    public void OnClick_FinishExpeditionTwo()
+    {
+        UiManager.instance.homeUi.CompleteExpeditionTwo();
+        this.gameObject.SetActive(false);
+        expaditionScreen.gameObject.SetActive(false);
+        DataManager.instance.all_ExpeditionRunningStatus[1] = false;
+        TimeCalculation.instance.ResetExpeditionTwoTimer();
+    }
+
+    #endregion
 }

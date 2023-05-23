@@ -6,8 +6,17 @@ using TMPro;
 
 public class ExpaditionReward : MonoBehaviour
 {
-    public Sprite[] all_IconSprites;
-    public int[] allFirstRewardAmounts;
-    public int[] allSecondRewardAmounts;
+    [Header("Expedition One Data")]
+    public Sprite[] all_ExpeditionOneIconSprites;
+    public int[] allExpeditionOneFirstRewardAmounts;
+    public int[] allExpeditionOneSecondRewardAmounts;
+
+    [Header("Expedition Two Data")]
+    public Sprite[] all_ExpeditionTwoIconSprites;
+    public int[] allExpeditionTwoFirstRewardAmounts;
+    public int[] allExpeditionTwoSecondRewardAmounts;
+
+
+    private int levelMultiplier = 100;
 
 }

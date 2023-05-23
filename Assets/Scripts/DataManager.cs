@@ -11,7 +11,7 @@ public class DataManager : MonoBehaviour
 
 
  
-
+    [Header ("Player Data")]
     public int playerLevel;
 
     [Header("Settings")]
@@ -22,6 +22,7 @@ public class DataManager : MonoBehaviour
     [Header("Expedition")]
     public bool[] all_ExpeditionRunningStatus;
     public int expeditionOneIndex = 0;
+    public int expeditionTwoIndex = 0;
 
 
     private void OnEnable()
@@ -37,6 +38,9 @@ public class DataManager : MonoBehaviour
         }
     }
 
+
+
+
     private void Start()
     {
         //isSoundTurnOn = UiManager.instance.settingUI.SoundToggleButton;
@@ -46,6 +50,15 @@ public class DataManager : MonoBehaviour
 
     private void Update()
     {
-        //UiManager.instance.homeUi.CheckExpeditionState();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClearPlayerPrefsData();
+        }
     }
+
+    private void ClearPlayerPrefsData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
 }

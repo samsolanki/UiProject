@@ -11,8 +11,8 @@ public class DailyMissionUI : MonoBehaviour
     [SerializeField] private DailyManagerSO[] all_DailyMissionsSO; // REFERANCE OF ALL ACTIVE DAILY MISSIONS
     [SerializeField] private DailyMissionData[] allDailyMisisonData;
 
-    [SerializeField] private GameObject parentOfDailyMission;
     [SerializeField] private GameObject pf_DailyMission;
+    [SerializeField] private GameObject parentOfDailyMission;
 
     [SerializeField] private int numberOfDailyMissions = 4;
 

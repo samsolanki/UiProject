@@ -6,8 +6,10 @@ using TMPro;
 
 public class DailyMissionData : MonoBehaviour
 {
-
+    [Header ("Daily Mission SO")]
     [SerializeField] public DailyManagerSO dailyMissionSO;
+
+    [Header ("Daily Mission Data")]
 
     public Image img_RewardIcon;
     public TextMeshProUGUI txt_Description;
@@ -19,11 +21,6 @@ public class DailyMissionData : MonoBehaviour
 
     public bool isDailyMissionComplate;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
    
     public void OnClick_DailyMissionClaimButton()

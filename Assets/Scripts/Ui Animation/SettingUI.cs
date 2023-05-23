@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SettingUI : MonoBehaviour
 {
-
+    [Header("Toggles Buttons")]
     [SerializeField] private Toggle toggle_Sound;
     [SerializeField] private Toggle toggle_Music;
     [SerializeField] private Toggle toggle_HighGrapgics;
