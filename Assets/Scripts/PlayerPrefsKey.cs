@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PlayerPrefsKey : MonoBehaviour
 {
-    public static string PLAYERPREFS_HERO_ACTIVE_INDEX;
+    //public static string PLAYERPREFS_HERO_ACTIVE_INDEX;
 }

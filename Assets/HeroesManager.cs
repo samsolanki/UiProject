@@ -10,35 +10,27 @@ public class HeroesManager : MonoBehaviour
     public int currentlyActiveHero;
 
     [SerializeField] private Vector3 v3_HeroPositionOffset;
+    public HeroData[] all_HeroData;
+
 
     private void Awake()
     {
         Instance = this;
 
-        if (!PlayerPrefs.HasKey(PlayerPrefsKey.PLAYERPREFS_HERO_ACTIVE_INDEX))
-        {
-            SetActiveHero();
-        }
-        else
-        {
-            GetActiveHero();
-        }
+        
         ActiveCurrentHero(currentlyActiveHero);
     }
 
-    public HeroData[] all_HeroData;
 
 
     public void SetActiveHero()
     {
-        PlayerPrefs.SetInt(PlayerPrefsKey.PLAYERPREFS_HERO_ACTIVE_INDEX, 0);
-        currentlyActiveHero = PlayerPrefs.GetInt(PlayerPrefsKey.PLAYERPREFS_HERO_ACTIVE_INDEX);
         
     }
 
     public void GetActiveHero()
     {
-        currentlyActiveHero = PlayerPrefs.GetInt(PlayerPrefsKey.PLAYERPREFS_HERO_ACTIVE_INDEX);
+
     }
 
     public void ActiveCurrentHero(int _heroIndex)

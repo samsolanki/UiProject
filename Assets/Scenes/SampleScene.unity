@@ -279,6 +279,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879425}
   m_CullTransparentMesh: 1
+--- !u!1 &2595581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2595582}
+  - component: {fileID: 2595584}
+  - component: {fileID: 2595583}
+  m_Layer: 5
+  m_Name: Image - Empty Sprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2595582
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2595581}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1869819836}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.2, y: 0.2}
+  m_AnchorMax: {x: 0.8, y: 0.8}
+  m_AnchoredPosition: {x: 0, y: -0.0000038146973}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2595583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2595581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5882353}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a3a50573e3c7f40d29fe95893fa47311, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2595584
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2595581}
+  m_CullTransparentMesh: 1
 --- !u!1 &3755620
 GameObject:
   m_ObjectHideFlags: 0
@@ -6576,7 +6652,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 21300000, guid: 9079162d3f5e946f88770d469ae4cd5b, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1001 &110071795
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16338,7 +16417,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 21300000, guid: 0a45b979ac5144eb4aba3aa461dff52b, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1 &366157857
 GameObject:
   m_ObjectHideFlags: 0
@@ -16522,7 +16604,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 21300000, guid: 8ad283ad25e6f4c168cc0b86cb0194c3, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1 &370221402
 GameObject:
   m_ObjectHideFlags: 0
@@ -16855,11 +16940,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3aaadad55bee624399ccd1123587b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 10
+  currentLevel: 1
   name: 
   sprite: {fileID: 21300000, guid: 21cc1b81d76504d088ae8268fe5286e0, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1 &381026424
 GameObject:
   m_ObjectHideFlags: 0
@@ -18663,7 +18751,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 21300000, guid: e0ba8de5c8b564a4da0d4072abb0d7f8, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1 &426960424
 GameObject:
   m_ObjectHideFlags: 0
@@ -25167,7 +25258,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 21300000, guid: e78145f1f73834b68ab6facb44522156, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1 &552306322
 GameObject:
   m_ObjectHideFlags: 0
@@ -32465,6 +32559,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 1
+--- !u!1 &677245339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 677245340}
+  - component: {fileID: 677245342}
+  - component: {fileID: 677245341}
+  m_Layer: 5
+  m_Name: Image - Upgrade Checker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &677245340
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677245339}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1869819836}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.65, y: 0}
+  m_AnchorMax: {x: 0.95, y: 0.7}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &677245341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677245339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: cdc0ed719cd9e4984833c4bf30baa837, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &677245342
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677245339}
+  m_CullTransparentMesh: 1
 --- !u!1 &682949925
 GameObject:
   m_ObjectHideFlags: 0
@@ -36596,7 +36766,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1869819836}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.3}
@@ -48741,7 +48911,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 21300000, guid: 1a62a92f3752e4aba801604f6a85b82e, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1 &1048641589
 GameObject:
   m_ObjectHideFlags: 0
@@ -51612,11 +51785,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3aaadad55bee624399ccd1123587b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 10
+  currentLevel: 1
   name: Power
   sprite: {fileID: 21300000, guid: b78052f66424a414a8af316f2b111fdd, type: 3}
   isLocked: 0
-  healthIncrease: 100
+  currentHealth: 100
+  healthIncrease:
+  - 20
+  - 30
+  - 40
+  - 50
+  - 60
+  - 70
+  - 80
+  - 90
+  - 100
+  - 110
+  currentMaterials: 100
+  requireMaterialToLevelUp: 0a000000140000001e00000028000000320000003c00000046000000500000005a0000008c000000
 --- !u!1 &1101094222
 GameObject:
   m_ObjectHideFlags: 0
@@ -53088,7 +53274,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1128578715}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2081904373}
+        m_TargetAssemblyTypeName: InventoryDetailsUI, Assembly-CSharp
+        m_MethodName: OnClick_EquipmentUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1128578715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55020,7 +55218,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 21300000, guid: 2e9c5b2e1bb824118b8deb06cc2f1780, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1 &1172448840
 GameObject:
   m_ObjectHideFlags: 0
@@ -56589,7 +56790,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 21300000, guid: 4c276b7de985e468ab366c0512e1593f, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1 &1202452709
 GameObject:
   m_ObjectHideFlags: 0
@@ -61986,7 +62190,7 @@ MonoBehaviour:
   - {fileID: 1980953951}
   - {fileID: 1201559494}
   - {fileID: 1365023109}
-  maxLevel: 0
+  maxLevel: 10
 --- !u!1 &1315648315
 GameObject:
   m_ObjectHideFlags: 0
@@ -62930,7 +63134,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 21300000, guid: 2e9c5b2e1bb824118b8deb06cc2f1780, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1 &1328847530
 GameObject:
   m_ObjectHideFlags: 0
@@ -64745,7 +64952,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 21300000, guid: 250719acbe268473cb04d065a2206e84, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1001 &1366414018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70857,10 +71067,10 @@ RectTransform:
   m_Father: {fileID: 1145286802}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 340.2, y: -25}
+  m_SizeDelta: {x: 550, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1471951028
 MonoBehaviour:
@@ -73546,10 +73756,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4a9c050d0732c4b8dea1c4c611726a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headSlot: {fileID: 1564708127}
   currentLevel: {fileID: 762969881}
+  headSlot: {fileID: 1564708127}
+  img_PlusIconSprite: {fileID: 1564708127}
+  img_Empty: {fileID: 2595583}
+  img_UpgradeEquipmentIcon: {fileID: 677245341}
   headEquipmentScrollView: {fileID: 855747167}
-  img_Button: {fileID: 1564708127}
+  isEquippedItemUpgradeAvaliable: 1
 --- !u!1 &1527585922
 GameObject:
   m_ObjectHideFlags: 0
@@ -75329,7 +75542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1564708126
 RectTransform:
   m_ObjectHideFlags: 0
@@ -77642,8 +77855,8 @@ RectTransform:
   m_Father: {fileID: 2106223503}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.2, y: 0.2}
+  m_AnchorMax: {x: 0.8, y: 0.8}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -77660,7 +77873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.48235294}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.49019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -79769,6 +79982,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649717746}
+  - component: {fileID: 1649717747}
   m_Layer: 0
   m_Name: Player Slot Manager
   m_TagString: Untagged
@@ -79797,6 +80011,19 @@ Transform:
   m_Father: {fileID: 1088573812}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1649717747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649717745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659919137cb812347884905b5baf95f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHeadItemEquipped: 1
 --- !u!1 &1649888523
 GameObject:
   m_ObjectHideFlags: 0
@@ -84615,7 +84842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.68, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000015258789, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.000030517578, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1752484728
@@ -85429,7 +85656,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 0}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1 &1771517302
 GameObject:
   m_ObjectHideFlags: 0
@@ -90746,7 +90976,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1564708126}
+  - {fileID: 2595582}
   - {fileID: 762969880}
+  - {fileID: 677245340}
   m_Father: {fileID: 689519470}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -93763,7 +93995,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 21300000, guid: e0ba8de5c8b564a4da0d4072abb0d7f8, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1 &1950384229
 GameObject:
   m_ObjectHideFlags: 0
@@ -95289,7 +95524,10 @@ MonoBehaviour:
   name: 
   sprite: {fileID: 21300000, guid: 56167c848515f441694cb011478f4ddc, type: 3}
   isLocked: 1
-  healthIncrease: 0
+  currentHealth: 0
+  healthIncrease: []
+  currentMaterials: 0
+  requireMaterialToLevelUp: 
 --- !u!1 &1983524288
 GameObject:
   m_ObjectHideFlags: 0
@@ -99950,7 +100188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2081904370
 RectTransform:
   m_ObjectHideFlags: 0
@@ -100032,15 +100270,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7403de5011bc44b83b167a66903c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeSlotUI: {fileID: 1524485409}
-  upgradeIcon: {fileID: 1387351589}
-  upgradeName: {fileID: 1194228777}
-  txt_currentLevel: {fileID: 1875086458}
-  upgradeMaxLevel: {fileID: 176682069}
-  currentHealth: {fileID: 1954441310}
-  upgradeHeadth: {fileID: 1130757465}
-  currentDamage: {fileID: 0}
-  upgradeDamage: {fileID: 0}
+  equipmentSlotUI: {fileID: 1524485409}
+  inventoryUI: {fileID: 855747171}
+  index: 0
+  img_EquipmentIcon: {fileID: 1387351589}
+  txt_EquipmentName: {fileID: 1194228777}
+  txt_EquipmentCurrentLevel: {fileID: 1875086458}
+  txt_EquipmentMaxLevel: {fileID: 176682069}
+  txt_EquipmentCurrentValue: {fileID: 1954441310}
+  txt_EquipmentIncreaseValue: {fileID: 1130757465}
+  btn_Update: {fileID: 1128578714}
+  img_EquipmentMaterialIcon: {fileID: 870750078}
+  txt_EquipmentcurrentMaterial: {fileID: 1396593343}
+  txt_EquipmentRequireMaterial: {fileID: 1752484728}
 --- !u!1 &2086112768
 GameObject:
   m_ObjectHideFlags: 0
@@ -103511,7 +103753,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 0, z: 0, w: -3.2786116e-24}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

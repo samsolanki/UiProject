@@ -44,9 +44,8 @@ public class PlayerSelectUI : MonoBehaviour
     {
         print("Hero Set");
         //playerUpgradePenal.transform.DOScale(new Vector3(1, 1, 1), openMenuAnimationDuration).SetEase(Ease.OutBounce);
-        PlayerPrefs.SetInt(PlayerPrefsKey.PLAYERPREFS_HERO_ACTIVE_INDEX, 1);
-        HeroesManager.Instance.ActiveCurrentHero(PlayerPrefs.GetInt(PlayerPrefsKey.PLAYERPREFS_HERO_ACTIVE_INDEX));
-        activeHeroStateUI.SetActiveHeroState(PlayerPrefs.GetInt(PlayerPrefsKey.PLAYERPREFS_HERO_ACTIVE_INDEX));
+        HeroesManager.Instance.ActiveCurrentHero(1);
+        activeHeroStateUI.SetActiveHeroState(1);
     }
 
     public void OnClick_OpenInventoryPanel()

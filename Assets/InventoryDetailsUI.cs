@@ -7,43 +7,74 @@ using TMPro;
 
 public class InventoryDetailsUI : MonoBehaviour
 {
-    [SerializeField] private EquipmentsSlotUI upgradeSlotUI;
+    [SerializeField] private EquipmentsSlotUI equipmentSlotUI;
+    [SerializeField] private InventoryUI inventoryUI;
 
-    public Image upgradeIcon;
-    public TextMeshProUGUI upgradeName;
-    [SerializeField] private TextMeshProUGUI txt_currentLevel;
-    public TextMeshProUGUI upgradeMaxLevel;
-    public TextMeshProUGUI currentHealth;
-    public TextMeshProUGUI upgradeHeadth;
-    public TextMeshProUGUI currentDamage;
-    public TextMeshProUGUI upgradeDamage;
+    public int index;
+    public Image img_EquipmentIcon;
+    public TextMeshProUGUI txt_EquipmentName;
+    public TextMeshProUGUI txt_EquipmentCurrentLevel;
+    public TextMeshProUGUI txt_EquipmentMaxLevel;
+    public TextMeshProUGUI txt_EquipmentCurrentValue;
+    public TextMeshProUGUI txt_EquipmentIncreaseValue;
+    [SerializeField] private Button btn_Update;
 
     [Header("Materials Property")]
-    [SerializeField] private Image img_MaterialIcon;
-    [SerializeField] private TextMeshProUGUI txt_currentMaterial;
-    [SerializeField] private TextMeshProUGUI txt_RequireMaterial;
+    [SerializeField] private Image img_EquipmentMaterialIcon;
+    public TextMeshProUGUI txt_EquipmentcurrentMaterial;
+    public TextMeshProUGUI txt_EquipmentRequireMaterial;
 
     private int currentLevel;
 
-    public void SetAllInventoryDetailsData(string name, int _currentLevel , Sprite icon , float _value)
+    public void SetAllInventoryDetailsData(int _index, string _name, int _currentLevel, Sprite _icon , float _currentValue , float _increaseValue, int _currentMaterial , int _requireMatrerial)
     {
-        upgradeName.text = name;
-        upgradeIcon.sprite = icon;
+        index = _index;
+        txt_EquipmentName.text = _name;
+        img_EquipmentIcon.sprite = _icon;
         currentLevel = _currentLevel;
-        txt_currentLevel.text = _currentLevel.ToString();
-        //upgradeMaxLevel.text = maxLevel.ToString();
-        upgradeHeadth.text = $"(+{_value.ToString()})"  ;
-        //upgradeDamage.text = $"(+{increaseDamage.ToString()})" ;
-        currentHealth.text = HeroesManager.Instance.GetHeroHealth(PlayerPrefs.GetInt(PlayerPrefsKey.PLAYERPREFS_HERO_ACTIVE_INDEX)).ToString();
-        currentDamage.text = HeroesManager.Instance.GetHeroDamage(PlayerPrefs.GetInt(PlayerPrefsKey.PLAYERPREFS_HERO_ACTIVE_INDEX)).ToString();
+        txt_EquipmentCurrentLevel.text = _currentLevel.ToString() + " / ";
+        txt_EquipmentMaxLevel.text = SlotHeadEquipmentManager.instance.maxLevel.ToString();
+        txt_EquipmentCurrentValue.text = _currentValue.ToString();
+        txt_EquipmentIncreaseValue.text = $"(+{_increaseValue.ToString()})"  ;
+        txt_EquipmentcurrentMaterial.text = _currentMaterial.ToString();
+        txt_EquipmentRequireMaterial.text = _requireMatrerial.ToString();
     }
+
+
+    public Button GetUpdateButton()
+    {
+        return btn_Update;
+    }
+
 
     public void OnClick_Equip()
     {
+        PlayerSlotManager.instance.isHeadItemEquipped = true;
         print(currentLevel);
-        upgradeSlotUI.SetSlotIcon(upgradeIcon.sprite, currentLevel);
+        equipmentSlotUI.SetSlotIcon(img_EquipmentIcon.sprite, currentLevel);
         this.gameObject.SetActive(false);
     }
+
+
+    public void OnClick_EquipmentUpgrade()
+    {
+        if(equipmentSlotUI.Set_HeadItemUpgradeAvaliableValue(index, currentLevel))
+        {
+            btn_Update.interactable = true;
+            inventoryUI.IncreaseEquipmentLevel(index);
+            txt_EquipmentcurrentMaterial.text = SlotHeadEquipmentManager.instance.all_HeadInventory[index].currentMaterials.ToString();
+            txt_EquipmentRequireMaterial.text = SlotHeadEquipmentManager.instance.all_HeadInventory[index]
+                .requireMaterialToLevelUp[SlotHeadEquipmentManager.instance.all_HeadInventory[index].currentLevel].ToString();
+
+            txt_EquipmentCurrentValue.text = equipmentSlotUI.Set_HeadItemValuesAfterUpgrade(index).ToString();
+            txt_EquipmentIncreaseValue.text = $"(+{SlotHeadEquipmentManager.instance.all_HeadInventory[index].healthIncrease[SlotHeadEquipmentManager.instance.all_HeadInventory[index].currentLevel].ToString()})";
+        }
+        else
+        {
+            btn_Update.interactable = false;
+        }
+    }
+
 
     public void OnClick_CloseButton()
     {

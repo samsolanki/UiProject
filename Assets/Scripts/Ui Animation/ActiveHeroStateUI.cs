@@ -14,7 +14,7 @@ public class ActiveHeroStateUI : MonoBehaviour
 
     private void Start()
     {
-        SetActiveHeroState(PlayerPrefs.GetInt(PlayerPrefsKey.PLAYERPREFS_HERO_ACTIVE_INDEX));
+        SetActiveHeroState(0);
         
     }
 
