@@ -5,11 +5,17 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-public class PlayerSelectUI : MonoBehaviour
+public class PlayerManagerUI : MonoBehaviour
 {
 
-    [Header("All Penal In Scree")]
+    // Change the name of the script to : PlayerManagerUI
 
+    [Header("Sub Scripts")]
+    public EquipmentsSlotUI ui_EquipmentSlots;
+    public HeadInventoryUI ui_InvetoryView;
+
+
+   /* [Header("All Penal In Scree")]
     [SerializeField] private ActiveHeroStateUI activeHeroStateUI;
 
 
@@ -25,11 +31,12 @@ public class PlayerSelectUI : MonoBehaviour
 
 
     [SerializeField] private float openMenuAnimationDuration; //TIME FOR OPEN MENU IN THIS MENU
-    [SerializeField] private float closeMenuAnimationDuration; //TIME FOR CLOSE MENU IN THIS MENU
+    [SerializeField] private float closeMenuAnimationDuration; //TIME FOR CLOSE MENU IN THIS MENU*/
 
 
     /// <summary>
     // TEMPORARAYYY
+    [Header("Temporary")]
     public GameObject panel_Upgrade;
     private void Start()
     {
@@ -45,24 +52,24 @@ public class PlayerSelectUI : MonoBehaviour
         print("Hero Set");
         //playerUpgradePenal.transform.DOScale(new Vector3(1, 1, 1), openMenuAnimationDuration).SetEase(Ease.OutBounce);
         HeroesManager.Instance.ActiveCurrentHero(1);
-        activeHeroStateUI.SetActiveHeroState(1);
+        //activeHeroStateUI.SetActiveHeroState(1);
     }
 
     public void OnClick_OpenInventoryPanel()
     {
-        inventoryPenal.transform.DOScale(new Vector3(1, 1, 1), openMenuAnimationDuration).SetEase(Ease.OutBounce);
+        //inventoryPenal.transform.DOScale(new Vector3(1, 1, 1), openMenuAnimationDuration).SetEase(Ease.OutBounce);
     }
 
 
     public void OnOpenInventoryDetailsPenalButtonCallbak()
     {
-        inventoryObjectDetailsPenal.transform.DOScale(new Vector3(1, 1, 1), .01f).SetEase(Ease.InBounce);
+        //inventoryObjectDetailsPenal.transform.DOScale(new Vector3(1, 1, 1), .01f).SetEase(Ease.InBounce);
     }
 
 
     public void OnClick_PlayerStatePanel()
     {
-        playerStatePenal.transform.DOScale(new Vector3(1, 1, 1), openMenuAnimationDuration).SetEase(Ease.OutBounce);
+        //playerStatePenal.transform.DOScale(new Vector3(1, 1, 1), openMenuAnimationDuration).SetEase(Ease.OutBounce);
     }
 
 }

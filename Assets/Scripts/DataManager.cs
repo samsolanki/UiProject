@@ -13,6 +13,7 @@ public class DataManager : MonoBehaviour
  
     [Header ("Player Data")]
     public int playerLevel;
+    public int coins;
 
     [Header("Settings")]
     public bool isSoundTurnOn;

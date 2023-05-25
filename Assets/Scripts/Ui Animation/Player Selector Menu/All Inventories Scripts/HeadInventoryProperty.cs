@@ -11,9 +11,8 @@ public class HeadInventoryProperty : MonoBehaviour
     public Sprite sprite;
     public bool isLocked = true;
 
+    public int requireCoinsToUpgrade;
     public float currentHealth;
-    public float[] healthIncrease;
-
-    public int currentMaterials;
+    public float healthIncrease;
     public int[] requireMaterialToLevelUp;
 }

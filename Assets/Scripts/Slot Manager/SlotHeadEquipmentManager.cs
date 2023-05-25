@@ -8,6 +8,8 @@ public class SlotHeadEquipmentManager : MonoBehaviour
     public static SlotHeadEquipmentManager instance;
 
     public HeadInventoryProperty[] all_HeadInventory;
+    public int currentMaterialCount;
+    public int currentEquippmentSelectedIndex;
 
     public int maxLevel;
 
@@ -16,4 +18,35 @@ public class SlotHeadEquipmentManager : MonoBehaviour
         instance = this;
     }
 
+    public bool hasEnoughMaterialsForUpgrade(int _slotIndex)
+    {
+        if(currentMaterialCount >= all_HeadInventory[_slotIndex].requireMaterialToLevelUp[all_HeadInventory[_slotIndex].currentLevel]){
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool hasEnoughCoinsForUpgrade(int _slotIndex)
+    {
+        //if (currentMaterialCount >= all_HeadInventory[_slotIndex].c[all_HeadInventory[_slotIndex].currentLevel])
+        //{
+        //    return true;
+        //}
+
+        if(DataManager.instance.coins >= all_HeadInventory[_slotIndex].requireCoinsToUpgrade)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void UpgradeEquipnent(int _itemIndex)
+    {
+        currentMaterialCount -= all_HeadInventory[_itemIndex].requireMaterialToLevelUp[all_HeadInventory[_itemIndex].currentLevel];
+        DataManager.instance.coins -= all_HeadInventory[_itemIndex].requireCoinsToUpgrade;
+        all_HeadInventory[_itemIndex].currentHealth += all_HeadInventory[_itemIndex].healthIncrease;
+        all_HeadInventory[_itemIndex].currentLevel++;
+    }
 }

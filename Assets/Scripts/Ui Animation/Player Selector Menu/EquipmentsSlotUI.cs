@@ -6,50 +6,98 @@ using TMPro;
 
 public class EquipmentsSlotUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI currentLevel;
 
     [Header("Head Slot")]
     [SerializeField] private Image headSlot;
     [SerializeField] private Image img_PlusIconSprite;
     [SerializeField] private Image img_Empty;
     [SerializeField] private Image img_UpgradeEquipmentIcon;
+    [SerializeField] private TextMeshProUGUI txt_CurrentLevel;
     [SerializeField] private GameObject headEquipmentScrollView;
-    public bool isEquippedItemUpgradeAvaliable;
+
+    [Header("Gun Slot")]
+    [SerializeField] private Image img_PlusIconSpriteGun;
+    [SerializeField] private Image img_EmptyGun;
+    [SerializeField] private Image img_UpgradeEquipmentIconGun;
+    [SerializeField] private TextMeshProUGUI txt_GunCurrentLevel;
+    [SerializeField] private GameObject gunEquipmentScrollView;
+
+
+    [Header("Arrmor Slot")]
+    [SerializeField] private Image img_PlusIconSpriteArrmor;
+    [SerializeField] private Image img_EmptyArrmor;
+    [SerializeField] private Image img_UpgradeEquipmentIconArrmor;
+    [SerializeField] private TextMeshProUGUI txt_ArrmorCurrentLevel;
+    [SerializeField] private GameObject arrmorEquipmentScrollView;
+
+
+    [Header("Glove Slot")]
+    [SerializeField] private Image img_PlusIconSpriteGlove;
+    [SerializeField] private Image img_EmptyGlove;
+    [SerializeField] private Image img_UpgradeEquipmentIconGlove;
+    [SerializeField] private TextMeshProUGUI txt_GloveCurrentLevel;
+    [SerializeField] private GameObject gloveEquipmentScrollView;
+
+
+    [Header("Ablities Slot")]
+    [SerializeField] private Image img_PlusIconSpriteAblities;
+    [SerializeField] private Image img_EmptyAblities;
+    [SerializeField] private Image img_UpgradeEquipmentIconAblities;
+    [SerializeField] private TextMeshProUGUI txt_AblitiesCurrentLevel;
+    [SerializeField] private GameObject ablitiesEquipmentScrollView;
 
 
     private void OnEnable()
     {
         if (PlayerSlotManager.instance.isHeadItemEquipped)
         {
-            CheckIfHeadItemEquipped();
-            CheckIf_HeadItemUpgradeAvaliable();
+            Assign_HeadEquippedItem(); // AssignEquippedItem();
         }
         else
         {
-            CheckIfAny_HeadItemIsUnlocked();
+            CheckIfWeHaveAnyHeadItemAvailable(); // CheckIfWeHaveAnyHeadItemAvailable
         }
     }
 
 
-    public void CheckIfHeadItemEquipped()
+    #region All Head Items
+
+
+    public void Assign_HeadEquippedItem()
     {
-        print("Item is Equipped");
+        img_PlusIconSprite.sprite = SlotHeadEquipmentManager.instance.all_HeadInventory[SlotHeadEquipmentManager.instance.currentEquippmentSelectedIndex].sprite;
+        txt_CurrentLevel.text = SlotHeadEquipmentManager.instance.all_HeadInventory[SlotHeadEquipmentManager.instance.currentEquippmentSelectedIndex]
+            .currentLevel.ToString();
+        txt_CurrentLevel.gameObject.SetActive(true);
+
+        // Check For Updgrade
+        CheckIfUpgradeAvailableForEquippedHeadItem();
     }
 
-    public void CheckIf_HeadItemUpgradeAvaliable()
+
+
+
+
+    public void CheckIfUpgradeAvailableForEquippedHeadItem()
     {
-        if (isEquippedItemUpgradeAvaliable)
-        {
-            img_UpgradeEquipmentIcon.gameObject.SetActive(true);
-        }
-        else
+        // IF CURRENT ITEM LEVEL IS GREATER OR EQUAL TO MAX LEVEL
+
+
+        if (!SlotHeadEquipmentManager.instance.hasEnoughMaterialsForUpgrade(SlotHeadEquipmentManager.instance.currentEquippmentSelectedIndex) ||
+            (SlotHeadEquipmentManager.instance.all_HeadInventory[SlotHeadEquipmentManager.instance.currentEquippmentSelectedIndex].currentLevel == SlotHeadEquipmentManager.instance.maxLevel))
         {
             img_UpgradeEquipmentIcon.gameObject.SetActive(false);
         }
+        else
+        {
+            img_UpgradeEquipmentIcon.gameObject.SetActive(true);
+        }
     }
-
-    public void CheckIfAny_HeadItemIsUnlocked()
+    public void CheckIfWeHaveAnyHeadItemAvailable()
     {
+        img_PlusIconSprite.gameObject.SetActive(false);
+        img_Empty.gameObject.SetActive(true);
+
         for (int i = 0; i < SlotHeadEquipmentManager.instance.all_HeadInventory.Length; i++)
         {
             if (!SlotHeadEquipmentManager.instance.all_HeadInventory[i].isLocked)
@@ -58,50 +106,137 @@ public class EquipmentsSlotUI : MonoBehaviour
                 img_Empty.gameObject.SetActive(false);
                 break;
             }
-            else
+        }
+    }
+
+    public TextMeshProUGUI GetHeadSlotLevelText()
+    {
+        return txt_CurrentLevel;
+    }
+
+    #endregion
+
+
+
+    #region All Guns Items
+
+    public void Assign_GunEquippedItem()
+    {
+        img_PlusIconSpriteGun.sprite = SlotGunsManager.instance.all_GunInventoryItems[SlotGunsManager.instance.currentEquippmentSelectedIndex].sprite;
+        txt_GunCurrentLevel.text = SlotGunsManager.instance.all_GunInventoryItems[SlotGunsManager.instance.currentEquippmentSelectedIndex]
+            .currentLevel.ToString();
+        txt_GunCurrentLevel.gameObject.SetActive(true);
+
+        // Check For Updgrade
+        CheckIfUpgradeAvailableForEquippedGunItem();
+    }
+
+
+
+
+
+    public void CheckIfUpgradeAvailableForEquippedGunItem()
+    {
+        // IF CURRENT ITEM LEVEL IS GREATER OR EQUAL TO MAX LEVEL
+
+
+        if (!SlotGunsManager.instance.hasEnoughMaterialsForUpgrade(SlotGunsManager.instance.currentEquippmentSelectedIndex) ||
+            (SlotGunsManager.instance.all_GunInventoryItems[SlotGunsManager.instance.currentEquippmentSelectedIndex].currentLevel == SlotGunsManager.instance.maxLevel))
+        {
+            img_UpgradeEquipmentIconGun.gameObject.SetActive(false);
+        }
+        else
+        {
+            img_UpgradeEquipmentIconGun.gameObject.SetActive(true);
+        }
+    }
+    public void CheckIfWeHaveAnyGunItemAvailable()
+    {
+        img_PlusIconSpriteGun.gameObject.SetActive(false);
+        img_EmptyGun.gameObject.SetActive(true);
+
+        for (int i = 0; i < SlotGunsManager.instance.all_GunInventoryItems.Length; i++)
+        {
+            if (!SlotGunsManager.instance.all_GunInventoryItems[i].isLocked)
             {
-                img_PlusIconSprite.gameObject.SetActive(false);
-                img_Empty.gameObject.SetActive(true);
+                img_PlusIconSpriteGun.gameObject.SetActive(true);
+                img_EmptyGun.gameObject.SetActive(false);
+                break;
             }
         }
     }
 
-
-    public bool Set_HeadItemUpgradeAvaliableValue(int index , int currentIndex)
+    public TextMeshProUGUI GetGunSlotLevelText()
     {
-        if(SlotHeadEquipmentManager.instance.all_HeadInventory[index].currentMaterials > SlotHeadEquipmentManager.instance.all_HeadInventory[index].requireMaterialToLevelUp[currentIndex])
+        return txt_GunCurrentLevel;
+    }
+
+
+
+
+    #endregion
+
+
+    #region All Arrmor Items
+
+
+    public void Assign_ArrmorEquippedItem()
+    {
+        img_PlusIconSpriteArrmor.sprite = SlotArrmorManager.instance.all_ArrmorInventoryItems[SlotArrmorManager.instance.currentEquippmentSelectedIndex].sprite;
+        txt_ArrmorCurrentLevel.text = SlotGunsManager.instance.all_GunInventoryItems[SlotArrmorManager.instance.currentEquippmentSelectedIndex]
+            .currentLevel.ToString();
+        txt_ArrmorCurrentLevel.gameObject.SetActive(true);
+
+        // Check For Updgrade
+        CheckIfUpgradeAvailableForEquippedArrmorItem();
+    }
+
+
+
+
+
+    public void CheckIfUpgradeAvailableForEquippedArrmorItem()
+    {
+        // IF CURRENT ITEM LEVEL IS GREATER OR EQUAL TO MAX LEVEL
+
+
+        if (!SlotArrmorManager.instance.hasEnoughMaterialsForUpgrade(SlotArrmorManager.instance.currentEquippmentSelectedIndex) ||
+            (SlotArrmorManager.instance.all_ArrmorInventoryItems[SlotArrmorManager.instance.currentEquippmentSelectedIndex].currentLevel == SlotArrmorManager.instance.maxLevel))
         {
-            SlotHeadEquipmentManager.instance.all_HeadInventory[index].currentMaterials -= SlotHeadEquipmentManager.instance.all_HeadInventory[index].requireMaterialToLevelUp[currentIndex];
-            return true;
+            img_UpgradeEquipmentIconArrmor.gameObject.SetActive(false);
         }
-        return false;
+        else
+        {
+            img_UpgradeEquipmentIconArrmor.gameObject.SetActive(true);
+        }
     }
-
-    public float Set_HeadItemValuesAfterUpgrade(int index)
+    public void CheckIfWeHaveAnyArrmorItemAvailable()
     {
-        float currentHealth = SlotHeadEquipmentManager.instance.all_HeadInventory[index].currentHealth;
-        float updatedHealth = SlotHeadEquipmentManager.instance.all_HeadInventory[index].healthIncrease[SlotHeadEquipmentManager.instance.all_HeadInventory[index].currentLevel];
+        img_PlusIconSpriteArrmor.gameObject.SetActive(false);
+        img_EmptyArrmor.gameObject.SetActive(true);
 
-        float changeHealth = currentHealth + updatedHealth;
-
-        SlotHeadEquipmentManager.instance.all_HeadInventory[index].currentHealth = changeHealth;
-
-        currentHealth = changeHealth;
-
-
-        print("current Health " + currentHealth + " Update Health " + updatedHealth);
-
-        return currentHealth;
-
+        for (int i = 0; i < SlotArrmorManager.instance.all_ArrmorInventoryItems.Length; i++)
+        {
+            if (!SlotArrmorManager.instance.all_ArrmorInventoryItems[i].isLocked)
+            {
+                img_PlusIconSpriteArrmor.gameObject.SetActive(true);
+                img_EmptyArrmor.gameObject.SetActive(false);
+                break;
+            }
+        }
     }
 
-
-    public void SetSlotIcon(Sprite image , int _currentLevel)
+    public TextMeshProUGUI GetArrmorSlotLevelText()
     {
-        headSlot.sprite = image;
-        currentLevel.text = _currentLevel.ToString();
-        currentLevel.gameObject.SetActive(true);
+        return txt_ArrmorCurrentLevel;
     }
+
+
+
+
+
+    #endregion
+
 
     public void OnClick_OpenHeadSlot()
     {
@@ -110,12 +245,12 @@ public class EquipmentsSlotUI : MonoBehaviour
 
     public void OnClick_OpenGunsSlot()
     {
-       
+        gunEquipmentScrollView.SetActive(true);
     }
 
     public void OnClick_OpenArrmoSlot()
     {
-
+        arrmorEquipmentScrollView.SetActive(true);
     }
 
     public void OnClick_OpenGlovesSlot()

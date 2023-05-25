@@ -5,30 +5,51 @@ using UnityEngine.UI;
 
 public class SlotArrmorManager : MonoBehaviour
 {
-    [SerializeField] private Button slotThree;
 
-    [SerializeField] private Image img_PlusSign;
+    public static SlotArrmorManager instance;
 
-    public List<GameObject> list_Arrmor = new List<GameObject>();
 
-    // Start is called before the first frame update
-    void Start()
+    public ArrmorEquipmentProperty[] all_ArrmorInventoryItems;
+    public int currentMaterialCount;
+    public int currentEquippmentSelectedIndex;
+
+    public int maxLevel;
+    private void Awake()
     {
-        CheckIfAnyItmesCanAdd();
+        instance = this;
     }
 
-    public void CheckIfAnyItmesCanAdd()
+    public bool hasEnoughMaterialsForUpgrade(int _slotIndex)
     {
-        if (list_Arrmor.Count > 0)
+        if (currentMaterialCount >= all_ArrmorInventoryItems[_slotIndex].requireMaterialToLevelUp[all_ArrmorInventoryItems[_slotIndex].currentLevel])
         {
-            img_PlusSign.gameObject.SetActive(true);
-            slotThree.interactable = true;
-        }
-        else
-        {
-            img_PlusSign.gameObject.SetActive(false);
-            slotThree.interactable = false;
+            return true;
         }
 
+        return false;
     }
+
+    public bool hasEnoughCoinsForUpgrade(int _slotIndex)
+    {
+        //if (currentMaterialCount >= all_HeadInventory[_slotIndex].c[all_HeadInventory[_slotIndex].currentLevel])
+        //{
+        //    return true;
+        //}
+
+        if (DataManager.instance.coins >= all_ArrmorInventoryItems[_slotIndex].requireCoinsToUpgrade)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void UpgradeEquipnent(int _itemIndex)
+    {
+        currentMaterialCount -= all_ArrmorInventoryItems[_itemIndex].requireMaterialToLevelUp[all_ArrmorInventoryItems[_itemIndex].currentLevel];
+        DataManager.instance.coins -= all_ArrmorInventoryItems[_itemIndex].requireCoinsToUpgrade;
+        all_ArrmorInventoryItems[_itemIndex].currentHealth += all_ArrmorInventoryItems[_itemIndex].healthIncrease;
+        all_ArrmorInventoryItems[_itemIndex].currentLevel++;
+    }
+
 }

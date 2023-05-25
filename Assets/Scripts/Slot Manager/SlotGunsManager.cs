@@ -8,35 +8,46 @@ public class SlotGunsManager : MonoBehaviour
     public static SlotGunsManager instance;
 
 
-    [SerializeField] private Button slotTwo;
+    public GunEquipmentProperty[] all_GunInventoryItems;
+    public int currentMaterialCount;
+    public int currentEquippmentSelectedIndex;
 
-    [SerializeField] private Image img_PlusSign;
-
-    public List<Sprite> list_Guns = new List<Sprite>();
-
+    public int maxLevel;
     private void Awake()
     {
         instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public bool hasEnoughMaterialsForUpgrade(int _slotIndex)
     {
-        CheckIfAnyItmesCanAdd();
+        if (currentMaterialCount >= all_GunInventoryItems[_slotIndex].requireMaterialToLevelUp[all_GunInventoryItems[_slotIndex].currentLevel])
+        {
+            return true;
+        }
+
+        return false;
     }
 
-    public void CheckIfAnyItmesCanAdd()
+    public bool hasEnoughCoinsForUpgrade(int _slotIndex)
     {
-        if (list_Guns.Count > 0)
+        //if (currentMaterialCount >= all_HeadInventory[_slotIndex].c[all_HeadInventory[_slotIndex].currentLevel])
+        //{
+        //    return true;
+        //}
+
+        if (DataManager.instance.coins >= all_GunInventoryItems[_slotIndex].requireCoinsToUpgrade)
         {
-            img_PlusSign.gameObject.SetActive(true);
-            slotTwo.interactable = true;
-        }
-        else
-        {
-            img_PlusSign.gameObject.SetActive(false);
-            slotTwo.interactable = false;
+            return true;
         }
 
+        return false;
+    }
+
+    public void UpgradeEquipnent(int _itemIndex)
+    {
+        currentMaterialCount -= all_GunInventoryItems[_itemIndex].requireMaterialToLevelUp[all_GunInventoryItems[_itemIndex].currentLevel];
+        DataManager.instance.coins -= all_GunInventoryItems[_itemIndex].requireCoinsToUpgrade;
+        all_GunInventoryItems[_itemIndex].currentDamage += all_GunInventoryItems[_itemIndex].damageIncrease;
+        all_GunInventoryItems[_itemIndex].currentLevel++;
     }
 }
