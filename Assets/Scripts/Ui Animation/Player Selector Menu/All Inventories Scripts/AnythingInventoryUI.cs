@@ -1,27 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
-using TMPro;
 
-public class HeadInventoryUI : MonoBehaviour
+public class AnythingInventoryUI : MonoBehaviour
 {
-    [SerializeField] private HeadInventoryEquipAndUpgradeUI headInventoryEquipAndUpgradeUI; // HeadInventoryEquipAndUpgradeUI
+    [SerializeField] private AnythingInventoryEquipAndUpgradeUI anythingInventoryEquipAndUpgradeUI;
 
-    [SerializeField] private EquipmentPrefabData pf_InventoryButton;   
+    [SerializeField] private EquipmentPrefabData pf_InventoryButton;
     [SerializeField] private Transform inventoryItemParent; // inventoryItemParent
 
     private void OnEnable()
     {
 
-        for (int i = 0; i < SlotHeadEquipmentManager.instance.all_HeadInventory.Length; i++)
+        for (int i = 0; i < SlotAnythingManager.instance.all_AnythingInventoryItems.Length; i++)
         {
-            if (!SlotHeadEquipmentManager.instance.all_HeadInventory[i].isLocked)
+            if (!SlotAnythingManager.instance.all_AnythingInventoryItems[i].isLocked)
             {
                 EquipmentPrefabData obj = Instantiate(pf_InventoryButton, transform.position, Quaternion.identity, inventoryItemParent);
-                obj.img_EquipmentIcon.sprite = SlotHeadEquipmentManager.instance.all_HeadInventory[i].sprite;
-                obj.txt_EquipmentCurrentLevel.text = SlotHeadEquipmentManager.instance.all_HeadInventory[i].currentLevel.ToString();
+                obj.img_EquipmentIcon.sprite = SlotAnythingManager.instance.all_AnythingInventoryItems[i].sprite;
+                obj.txt_EquipmentCurrentLevel.text = SlotAnythingManager.instance.all_AnythingInventoryItems[i].currentLevel.ToString();
                 int index = i; // test this with only i
                 obj.GetComponent<Button>().onClick.AddListener(() => OnClick_Object(index));
             }
@@ -30,9 +28,10 @@ public class HeadInventoryUI : MonoBehaviour
 
     public void OnClick_Object(int index)
     {
+        print(index);
         this.gameObject.SetActive(false);
-        headInventoryEquipAndUpgradeUI.gameObject.SetActive(true);
-        headInventoryEquipAndUpgradeUI.SetHeadEquipAndUpgradePanel(index); 
+        anythingInventoryEquipAndUpgradeUI.gameObject.SetActive(true);
+        anythingInventoryEquipAndUpgradeUI.SetHeadEquipAndUpgradePanel(index);
     }
 
     private void OnDisable()
@@ -45,7 +44,7 @@ public class HeadInventoryUI : MonoBehaviour
     }
 
     public void OnClick_CloseButton()
-    { 
+    {
         this.gameObject.SetActive(false);
     }
 }

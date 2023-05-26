@@ -34,7 +34,7 @@ public class GunInventoryEquipAndUpgradeUI : MonoBehaviour
         {
             print("Disable update");
             btn_Upgrade.gameObject.SetActive(false);
-            UiManager.instance.ui_PlayerSelect.ui_EquipmentSlots.CheckIfUpgradeAvailableForEquippedHeadItem();
+            UiManager.instance.ui_PlayerManager.ui_EquipmentSlots.CheckIfUpgradeAvailableForEquippedGunItem();
         }
 
 
@@ -56,8 +56,12 @@ public class GunInventoryEquipAndUpgradeUI : MonoBehaviour
     public void OnClick_Equip()
     {
         PlayerSlotManager.instance.isGunItemEquipped = true;
+
         SlotGunsManager.instance.currentEquippmentSelectedIndex = currentItemSelectedIndex;
-        UiManager.instance.ui_PlayerSelect.ui_EquipmentSlots.Assign_GunEquippedItem();
+        UiManager.instance.ui_PlayerManager.ui_EquipmentSlots.Assign_GunEquippedItem();
+
+        UiManager.instance.ui_PlayerManager.SetGunSlotState();
+
 
         this.gameObject.SetActive(false);
     }
@@ -83,7 +87,7 @@ public class GunInventoryEquipAndUpgradeUI : MonoBehaviour
 
         // slot head manager increase level
         SetHeadEquipAndUpgradePanel(currentItemSelectedIndex);
-        UiManager.instance.ui_PlayerSelect.ui_EquipmentSlots.GetGunSlotLevelText().text = SlotGunsManager.instance.all_GunInventoryItems[currentItemSelectedIndex].currentLevel.ToString();
+        UiManager.instance.ui_PlayerManager.ui_EquipmentSlots.GetGunSlotLevelText().text = SlotGunsManager.instance.all_GunInventoryItems[currentItemSelectedIndex].currentLevel.ToString();
 
     }
 

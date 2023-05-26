@@ -43,6 +43,19 @@ public class SlotGunsManager : MonoBehaviour
         return false;
     }
 
+
+    public void SetLevelData()
+    {
+        if (all_GunInventoryItems[currentEquippmentSelectedIndex].currentLevel > 1)
+        {
+            for (int i = 0; i < all_GunInventoryItems[currentEquippmentSelectedIndex].currentLevel; i++)
+            {
+                all_GunInventoryItems[currentEquippmentSelectedIndex].currentDamage += all_GunInventoryItems[currentEquippmentSelectedIndex].damageIncrease;
+            }
+        }
+    }
+
+
     public void UpgradeEquipnent(int _itemIndex)
     {
         currentMaterialCount -= all_GunInventoryItems[_itemIndex].requireMaterialToLevelUp[all_GunInventoryItems[_itemIndex].currentLevel];

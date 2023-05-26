@@ -42,6 +42,8 @@ public class SlotHeadEquipmentManager : MonoBehaviour
         return false;
     }
 
+
+
     public void UpgradeEquipnent(int _itemIndex)
     {
         currentMaterialCount -= all_HeadInventory[_itemIndex].requireMaterialToLevelUp[all_HeadInventory[_itemIndex].currentLevel];

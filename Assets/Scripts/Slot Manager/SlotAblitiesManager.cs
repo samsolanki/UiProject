@@ -5,30 +5,61 @@ using UnityEngine.UI;
 
 public class SlotAblitiesManager : MonoBehaviour
 {
-    [SerializeField] private Button slotSix;
+    public static SlotAblitiesManager instance;
 
-    [SerializeField] private Image img_PlusSign;
 
-    public List<GameObject> list_Abilities = new List<GameObject>();
+    public AbilitesInventoryProperty[] all_AbilitesInventoryItems;
+    public int currentMaterialCount;
+    public int currentEquippmentSelectedIndex;
 
-    // Start is called before the first frame update
-    void Start()
+    public int maxLevel;
+    private void Awake()
     {
-        CheckIfAnyItmesCanAdd();
+        instance = this;
     }
 
-    public void CheckIfAnyItmesCanAdd()
+    public bool hasEnoughMaterialsForUpgrade(int _slotIndex)
     {
-        if (list_Abilities.Count > 0)
+        if (currentMaterialCount >= all_AbilitesInventoryItems[_slotIndex].requireMaterialToLevelUp[all_AbilitesInventoryItems[_slotIndex].currentLevel])
         {
-            img_PlusSign.gameObject.SetActive(true);
-            slotSix.interactable = true;
-        }
-        else
-        {
-            img_PlusSign.gameObject.SetActive(false);
-            slotSix.interactable = false;
+            return true;
         }
 
+        return false;
+    }
+
+    public bool hasEnoughCoinsForUpgrade(int _slotIndex)
+    {
+        //if (currentMaterialCount >= all_HeadInventory[_slotIndex].c[all_HeadInventory[_slotIndex].currentLevel])
+        //{
+        //    return true;
+        //}
+
+        if (DataManager.instance.coins >= all_AbilitesInventoryItems[_slotIndex].requireCoinsToUpgrade)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public void SetLevelData()
+    {
+        if (all_AbilitesInventoryItems[currentEquippmentSelectedIndex].currentLevel > 1)
+        {
+            for (int i = 0; i < all_AbilitesInventoryItems[currentEquippmentSelectedIndex].currentLevel; i++)
+            {
+                all_AbilitesInventoryItems[currentEquippmentSelectedIndex].currentFirerate += all_AbilitesInventoryItems[currentEquippmentSelectedIndex].firerateIncrease;
+            }
+        }
+    }
+
+    public void UpgradeEquipnent(int _itemIndex)
+    {
+        currentMaterialCount -= all_AbilitesInventoryItems[_itemIndex].requireMaterialToLevelUp[all_AbilitesInventoryItems[_itemIndex].currentLevel];
+        DataManager.instance.coins -= all_AbilitesInventoryItems[_itemIndex].requireCoinsToUpgrade;
+        all_AbilitesInventoryItems[_itemIndex].currentFirerate += all_AbilitesInventoryItems[_itemIndex].firerateIncrease;
+        all_AbilitesInventoryItems[_itemIndex].currentLevel++;
     }
 }

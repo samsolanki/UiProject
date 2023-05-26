@@ -10,7 +10,11 @@ public class HeroData : MonoBehaviour
     public string str_HeroName;
     public int currentLevel;
     public int all_UpgradePrices;
+    public int currentCards;
     public int requireCardsToUnlock;
+
+
+    [Space]
 
     // Stats
     public float flt_MoveSpeed;

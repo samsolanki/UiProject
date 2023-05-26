@@ -34,7 +34,7 @@ public class ArrmorInventoryEquipAndUpgradeUI : MonoBehaviour
         {
             print("Disable update");
             btn_Upgrade.gameObject.SetActive(false);
-            UiManager.instance.ui_PlayerSelect.ui_EquipmentSlots.CheckIfUpgradeAvailableForEquippedArrmorItem();
+            UiManager.instance.ui_PlayerManager.ui_EquipmentSlots.CheckIfUpgradeAvailableForEquippedArrmorItem();
         }
 
 
@@ -57,7 +57,11 @@ public class ArrmorInventoryEquipAndUpgradeUI : MonoBehaviour
     {
         PlayerSlotManager.instance.isArrmorItemEquipped = true;
         SlotArrmorManager.instance.currentEquippmentSelectedIndex = currentItemSelectedIndex;
-        UiManager.instance.ui_PlayerSelect.ui_EquipmentSlots.Assign_ArrmorEquippedItem();
+        UiManager.instance.ui_PlayerManager.ui_EquipmentSlots.Assign_ArrmorEquippedItem();
+
+        UiManager.instance.ui_PlayerManager.SetArrmorSlotState();
+
+
 
         this.gameObject.SetActive(false);
     }
@@ -81,9 +85,12 @@ public class ArrmorInventoryEquipAndUpgradeUI : MonoBehaviour
 
         SlotArrmorManager.instance.UpgradeEquipnent(currentItemSelectedIndex);
 
+
+
+
         // slot head manager increase level
         SetHeadEquipAndUpgradePanel(currentItemSelectedIndex);
-        UiManager.instance.ui_PlayerSelect.ui_EquipmentSlots.GetArrmorSlotLevelText().text = SlotArrmorManager.instance.all_ArrmorInventoryItems[currentItemSelectedIndex].currentLevel.ToString();
+        UiManager.instance.ui_PlayerManager.ui_EquipmentSlots.GetArrmorSlotLevelText().text = SlotArrmorManager.instance.all_ArrmorInventoryItems[currentItemSelectedIndex].currentLevel.ToString();
 
     }
 

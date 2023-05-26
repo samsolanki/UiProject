@@ -10,7 +10,7 @@ public class UiManager : MonoBehaviour
     public HomeUI homeUi; // ui_Home
     public SettingUI settingUI; // ui_Settings
     public RewardSummaryUI rewardSummaryUI; // ui_RewardSummary
-    public PlayerManagerUI ui_PlayerSelect; 
+    public PlayerManagerUI ui_PlayerManager; 
 
 
     [SerializeField] private bool canChangeMenus;

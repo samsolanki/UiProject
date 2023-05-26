@@ -1,27 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
-using TMPro;
 
-public class HeadInventoryUI : MonoBehaviour
+public class GlovesInventoryUI : MonoBehaviour
 {
-    [SerializeField] private HeadInventoryEquipAndUpgradeUI headInventoryEquipAndUpgradeUI; // HeadInventoryEquipAndUpgradeUI
+    [SerializeField] private GlovesInventoryEquipAndUpgradeUI glovesInventoryEquipAndUpgradeUI;
 
-    [SerializeField] private EquipmentPrefabData pf_InventoryButton;   
+    [SerializeField] private EquipmentPrefabData pf_InventoryButton;
     [SerializeField] private Transform inventoryItemParent; // inventoryItemParent
 
     private void OnEnable()
     {
 
-        for (int i = 0; i < SlotHeadEquipmentManager.instance.all_HeadInventory.Length; i++)
+        for (int i = 0; i < SlotGlovesManager.instance.all_GlovesInventoryItems.Length; i++)
         {
-            if (!SlotHeadEquipmentManager.instance.all_HeadInventory[i].isLocked)
+            if (!SlotGlovesManager.instance.all_GlovesInventoryItems[i].isLocked)
             {
                 EquipmentPrefabData obj = Instantiate(pf_InventoryButton, transform.position, Quaternion.identity, inventoryItemParent);
-                obj.img_EquipmentIcon.sprite = SlotHeadEquipmentManager.instance.all_HeadInventory[i].sprite;
-                obj.txt_EquipmentCurrentLevel.text = SlotHeadEquipmentManager.instance.all_HeadInventory[i].currentLevel.ToString();
+                obj.img_EquipmentIcon.sprite = SlotGlovesManager.instance.all_GlovesInventoryItems[i].sprite;
+                obj.txt_EquipmentCurrentLevel.text = SlotGlovesManager.instance.all_GlovesInventoryItems[i].currentLevel.ToString();
                 int index = i; // test this with only i
                 obj.GetComponent<Button>().onClick.AddListener(() => OnClick_Object(index));
             }
@@ -31,8 +29,8 @@ public class HeadInventoryUI : MonoBehaviour
     public void OnClick_Object(int index)
     {
         this.gameObject.SetActive(false);
-        headInventoryEquipAndUpgradeUI.gameObject.SetActive(true);
-        headInventoryEquipAndUpgradeUI.SetHeadEquipAndUpgradePanel(index); 
+        glovesInventoryEquipAndUpgradeUI.gameObject.SetActive(true);
+        glovesInventoryEquipAndUpgradeUI.SetHeadEquipAndUpgradePanel(index);
     }
 
     private void OnDisable()
@@ -45,7 +43,7 @@ public class HeadInventoryUI : MonoBehaviour
     }
 
     public void OnClick_CloseButton()
-    { 
+    {
         this.gameObject.SetActive(false);
     }
 }

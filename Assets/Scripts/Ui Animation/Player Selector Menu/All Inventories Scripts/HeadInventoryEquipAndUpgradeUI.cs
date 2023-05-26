@@ -36,7 +36,7 @@ public class HeadInventoryEquipAndUpgradeUI : MonoBehaviour
         {
             print("Disable update");
             btn_Upgrade.gameObject.SetActive(false);
-            UiManager.instance.ui_PlayerSelect.ui_EquipmentSlots.CheckIfUpgradeAvailableForEquippedHeadItem();
+            UiManager.instance.ui_PlayerManager.ui_EquipmentSlots.CheckIfUpgradeAvailableForEquippedHeadItem();
         }
 
 
@@ -58,9 +58,16 @@ public class HeadInventoryEquipAndUpgradeUI : MonoBehaviour
     public void OnClick_Equip()
     {
         PlayerSlotManager.instance.isHeadItemEquipped = true;
+
+
         SlotHeadEquipmentManager.instance.currentEquippmentSelectedIndex = currentItemSelectedIndex;
-        UiManager.instance.ui_PlayerSelect.ui_EquipmentSlots.Assign_HeadEquippedItem();
+
+        UiManager.instance.ui_PlayerManager.ui_EquipmentSlots.Assign_HeadEquippedItem();
+        UiManager.instance.ui_PlayerManager.SetHeadState();
+
+        
        
+
         this.gameObject.SetActive(false);
     }
 
@@ -83,9 +90,11 @@ public class HeadInventoryEquipAndUpgradeUI : MonoBehaviour
 
         SlotHeadEquipmentManager.instance.UpgradeEquipnent(currentItemSelectedIndex);
        
+
+
         // slot head manager increase level
         SetHeadEquipAndUpgradePanel(currentItemSelectedIndex);
-        UiManager.instance.ui_PlayerSelect.ui_EquipmentSlots.GetHeadSlotLevelText().text = SlotHeadEquipmentManager.instance.all_HeadInventory[currentItemSelectedIndex].currentLevel.ToString();
+        UiManager.instance.ui_PlayerManager.ui_EquipmentSlots.GetHeadSlotLevelText().text = SlotHeadEquipmentManager.instance.all_HeadInventory[currentItemSelectedIndex].currentLevel.ToString();
 
     }
 

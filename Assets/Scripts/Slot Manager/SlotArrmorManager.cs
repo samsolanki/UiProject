@@ -44,6 +44,18 @@ public class SlotArrmorManager : MonoBehaviour
         return false;
     }
 
+
+    public void SetLevelData()
+    {
+        if (all_ArrmorInventoryItems[currentEquippmentSelectedIndex].currentLevel > 1)
+        {
+            for (int i = 0; i < all_ArrmorInventoryItems[currentEquippmentSelectedIndex].currentLevel; i++)
+            {
+                all_ArrmorInventoryItems[currentEquippmentSelectedIndex].currentHealth += all_ArrmorInventoryItems[currentEquippmentSelectedIndex].healthIncrease;
+            }
+        }
+    }
+
     public void UpgradeEquipnent(int _itemIndex)
     {
         currentMaterialCount -= all_ArrmorInventoryItems[_itemIndex].requireMaterialToLevelUp[all_ArrmorInventoryItems[_itemIndex].currentLevel];

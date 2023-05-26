@@ -5,30 +5,61 @@ using UnityEngine.UI;
 
 public class SlotGlovesManager : MonoBehaviour
 {
-    [SerializeField] private Button slotFour;
+    public static SlotGlovesManager instance;
 
-    [SerializeField] private Image img_PlusSign;
 
-    public List<GameObject> list_Gloves = new List<GameObject>();
+    public GlovesEquipmentProperty[] all_GlovesInventoryItems;
+    public int currentMaterialCount;
+    public int currentEquippmentSelectedIndex;
 
-    // Start is called before the first frame update
-    void Start()
+    public int maxLevel;
+    private void Awake()
     {
-        CheckIfAnyItmesCanAdd();
+        instance = this;
     }
 
-    public void CheckIfAnyItmesCanAdd()
+    public bool hasEnoughMaterialsForUpgrade(int _slotIndex)
     {
-        if (list_Gloves.Count > 0)
+        if (currentMaterialCount >= all_GlovesInventoryItems[_slotIndex].requireMaterialToLevelUp[all_GlovesInventoryItems[_slotIndex].currentLevel])
         {
-            img_PlusSign.gameObject.SetActive(true);
-            slotFour.interactable = true;
-        }
-        else
-        {
-            img_PlusSign.gameObject.SetActive(false);
-            slotFour.interactable = false;
+            return true;
         }
 
+        return false;
+    }
+
+    public bool hasEnoughCoinsForUpgrade(int _slotIndex)
+    {
+        //if (currentMaterialCount >= all_HeadInventory[_slotIndex].c[all_HeadInventory[_slotIndex].currentLevel])
+        //{
+        //    return true;
+        //}
+
+        if (DataManager.instance.coins >= all_GlovesInventoryItems[_slotIndex].requireCoinsToUpgrade)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public void SetLevelData()
+    {
+        if (all_GlovesInventoryItems[currentEquippmentSelectedIndex].currentLevel > 1)
+        {
+            for (int i = 0; i < all_GlovesInventoryItems[currentEquippmentSelectedIndex].currentLevel; i++)
+            {
+                all_GlovesInventoryItems[currentEquippmentSelectedIndex].currentDamage += all_GlovesInventoryItems[currentEquippmentSelectedIndex].damageIncrease;
+            }
+        }
+    }
+
+    public void UpgradeEquipnent(int _itemIndex)
+    {
+        currentMaterialCount -= all_GlovesInventoryItems[_itemIndex].requireMaterialToLevelUp[all_GlovesInventoryItems[_itemIndex].currentLevel];
+        DataManager.instance.coins -= all_GlovesInventoryItems[_itemIndex].requireCoinsToUpgrade;
+        all_GlovesInventoryItems[_itemIndex].currentDamage += all_GlovesInventoryItems[_itemIndex].damageIncrease;
+        all_GlovesInventoryItems[_itemIndex].currentLevel++;
     }
 }
