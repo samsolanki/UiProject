@@ -2,37 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class ImageSwipeContrallorUI : MonoBehaviour , IDragHandler ,IBeginDragHandler , IEndDragHandler
+public class ImageSwipeContrallorUI : MonoBehaviour
 {
 
-    [SerializeField] private float flt_DiffrentBetweenTwoSlide; //DIFFRENCE BETWEEN TO IMAGES
-    [SerializeField] private int int_NumberOfImages; //COUNT OF ALL IMAGE IN SLIDER 
+    public Scrollbar scrollbar;
+    public float scrollPos;
+    public Image[] all_Images;
+    public float[] all_Pos;
+    public float snapSpeed = 0.2f;
 
-    private Vector3 tempLocation;
 
-    private void Start()
+
+    private void Update()
     {
-        tempLocation = transform.position;
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        float diffrence = eventData.pressPosition.x - eventData.position.x;
-
-        if(diffrence > flt_DiffrentBetweenTwoSlide / 2)
+        all_Pos = new float[all_Images.Length];
+        float distance = 1f / (all_Images.Length - 1f);
+        for (int i = 0; i < all_Pos.Length; i++)
         {
-            this.transform.position =  new Vector2(diffrence, -753f);
+            all_Pos[i] = distance * i;
         }
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        
+        if (Input.GetMouseButton(0))
+        {
+            scrollPos = scrollbar.value;
+        }
+        else
+        {
+            for (int i = 0; i < all_Pos.Length; i++)
+            {
+                if (scrollPos < all_Pos[i] + (distance / 2) && scrollPos > all_Pos[i] - (distance / 2))
+                {
+                    scrollbar.value = Mathf.Lerp(scrollbar.value, all_Pos[i], snapSpeed * Time.deltaTime);
+                }
+            }
+        }
     }
 }

@@ -13,7 +13,9 @@ public class PlayerManagerUI : MonoBehaviour
     [Header("Sub Scripts")]
     public EquipmentsSlotUI ui_EquipmentSlots;
     public HeadInventoryUI ui_InvetoryView;
+    public HeroSelectionUI ui_HeroSelection;
 
+    [SerializeField] private GameObject[] all_HerosModel;
 
     [Header("Current Player State")]
     [SerializeField] private TextMeshProUGUI txt_Health;
@@ -34,17 +36,60 @@ public class PlayerManagerUI : MonoBehaviour
     public GameObject panel_Upgrade;
 
 
-   
+    private void OnEnable()
+    {
+        SetActiveHero();
+    }
 
 
     private void Start()
     {
         panel_Upgrade.SetActive(true);
-        txt_Health.text = HeroesManager.Instance.GetHeroHealth(characterIndex).ToString();
-        txt_Damage.text = HeroesManager.Instance.GetHeroDamage(characterIndex).ToString();
-        txt_Firerate.text = HeroesManager.Instance.GetHeroFirerate(characterIndex).ToString();
+
+        SetPlayerData(characterIndex);
     }
 
+    public void SetActiveHero()
+    {
+        for(int i =0; i < all_HerosModel.Length; i++){
+
+            if(i == HeroesManager.Instance.currentActiveSelectedHeroIndex)
+            {
+                all_HerosModel[HeroesManager.Instance.currentActiveSelectedHeroIndex].SetActive(true);
+            }
+            else
+            {
+                all_HerosModel[i].SetActive(false);
+
+            }
+        }
+    }
+
+    public void SetPlayerData(int _heroIndex)
+    {
+        if(PlayerSlotManager.instance.isHeadItemEquipped || PlayerSlotManager.instance.isGunItemEquipped ||
+            PlayerSlotManager.instance.isArrmorItemEquipped || PlayerSlotManager.instance.isGlovesItemEquipped ||
+            PlayerSlotManager.instance.isAnythingItemEquipped || PlayerSlotManager.instance.isAblitiesItemEquipped)
+        {
+            SetHeadState();
+
+            SetGunSlotState();
+
+            SetArrmorSlotState();
+
+            SetGlovesSlotState();
+
+            SetAnythingSlotState();
+
+            SetAbilitiesSlotState();
+        }
+        else
+        {
+            txt_Health.text = HeroesManager.Instance.GetHeroHealth(_heroIndex).ToString("F0");
+            txt_Damage.text = HeroesManager.Instance.GetHeroDamage(_heroIndex).ToString("F0");
+            txt_Firerate.text = HeroesManager.Instance.GetHeroFirerate(_heroIndex).ToString("F0");
+        }
+    }
 
     #region All SlotsSetting Data
 
@@ -59,11 +104,16 @@ public class PlayerManagerUI : MonoBehaviour
 
         // Calculate health only
         // calculate base health
-        float baseHealth = HeroesManager.Instance.GetHeroHealth(characterIndex);
+        float baseHealth = HeroesManager.Instance.GetHeroHealth(HeroesManager.Instance.currentActiveSelectedHeroIndex);
         float headSlotHealthBonus = SlotHeadEquipmentManager.instance.all_HeadInventory[SlotHeadEquipmentManager.instance.currentEquippmentSelectedIndex].currentHealth;
 
+        if (PlayerSlotManager.instance.isArrmorItemEquipped)
+        {
+            headSlotHealthBonus += SlotArrmorManager.instance.all_ArrmorInventoryItems[SlotArrmorManager.instance.currentEquippmentSelectedIndex].currentHealth;
+        }
+
         float totalHealth = baseHealth + headSlotHealthBonus;
-        txt_Health.text = totalHealth.ToString();
+        txt_Health.text = totalHealth.ToString("F0");
 
     }
 
@@ -74,12 +124,20 @@ public class PlayerManagerUI : MonoBehaviour
             return;
         }
 
-        float baseDamage = HeroesManager.Instance.GetHeroDamage(characterIndex);
+        float baseDamage = HeroesManager.Instance.GetHeroDamage(HeroesManager.Instance.currentActiveSelectedHeroIndex);
         float headSlotDamageBonus = SlotGunsManager.instance.all_GunInventoryItems[SlotGunsManager.instance.currentEquippmentSelectedIndex].currentDamage;
+
+        
+
+
+        if (PlayerSlotManager.instance.isGlovesItemEquipped)
+        {
+            headSlotDamageBonus += SlotGlovesManager.instance.all_GlovesInventoryItems[SlotGlovesManager.instance.currentEquippmentSelectedIndex].currentDamage;
+        }
 
         float totalDamage = baseDamage + headSlotDamageBonus;
 
-        txt_Damage.text = totalDamage.ToString();
+        txt_Damage.text = totalDamage.ToString("F0");
     }
 
     public void SetArrmorSlotState()
@@ -89,12 +147,17 @@ public class PlayerManagerUI : MonoBehaviour
             return;
         }
 
-        float baseHealth = HeroesManager.Instance.GetHeroHealth(characterIndex);
+        float baseHealth = HeroesManager.Instance.GetHeroHealth(HeroesManager.Instance.currentActiveSelectedHeroIndex);
         float arrmorSlotHealthBonus = SlotArrmorManager.instance.all_ArrmorInventoryItems[SlotArrmorManager.instance.currentEquippmentSelectedIndex].currentHealth;
+
+        if (PlayerSlotManager.instance.isHeadItemEquipped)
+        {
+            arrmorSlotHealthBonus += SlotHeadEquipmentManager.instance.all_HeadInventory[SlotHeadEquipmentManager.instance.currentEquippmentSelectedIndex].currentHealth;
+        }
 
         float totalHealth = baseHealth + arrmorSlotHealthBonus;
 
-        txt_Health.text = totalHealth.ToString();
+        txt_Health.text = totalHealth.ToString("F0");
     }
 
     public void SetGlovesSlotState()
@@ -105,12 +168,19 @@ public class PlayerManagerUI : MonoBehaviour
             return;
         }
 
-        float baseDamage = HeroesManager.Instance.GetHeroDamage(characterIndex);
+        float baseDamage = HeroesManager.Instance.GetHeroDamage(HeroesManager.Instance.currentActiveSelectedHeroIndex);
         float headSlotDamageBonus = SlotGlovesManager.instance.all_GlovesInventoryItems[SlotGlovesManager.instance.currentEquippmentSelectedIndex].currentDamage;
+
+
+        if (PlayerSlotManager.instance.isGunItemEquipped)
+        {
+            headSlotDamageBonus += SlotGunsManager.instance.all_GunInventoryItems[SlotGlovesManager.instance.currentEquippmentSelectedIndex].currentDamage;
+        }
+
 
         float totalDamage = baseDamage + headSlotDamageBonus;
 
-        txt_Damage.text = totalDamage.ToString();
+        txt_Damage.text = totalDamage.ToString("F0");
     }
 
     public void SetAnythingSlotState()
@@ -121,11 +191,16 @@ public class PlayerManagerUI : MonoBehaviour
             return;
         }
 
-        float baseFirerate = HeroesManager.Instance.GetHeroFirerate(characterIndex);
+        float baseFirerate = HeroesManager.Instance.GetHeroFirerate(HeroesManager.Instance.currentActiveSelectedHeroIndex);
         float anythingSlotFirerateBonus = SlotAnythingManager.instance.all_AnythingInventoryItems[SlotAnythingManager.instance.currentEquippmentSelectedIndex].currentFirerate;
 
+        if (PlayerSlotManager.instance.isAblitiesItemEquipped)
+        {
+            anythingSlotFirerateBonus += SlotAblitiesManager.instance.all_AbilitesInventoryItems[SlotAblitiesManager.instance.currentEquippmentSelectedIndex].currentFirerate;
+        }
+
         float totalFirearate = baseFirerate + anythingSlotFirerateBonus;
-        txt_Firerate.text = totalFirearate.ToString();
+        txt_Firerate.text = totalFirearate.ToString("F0");
     }
 
     public void SetAbilitiesSlotState()
@@ -136,11 +211,16 @@ public class PlayerManagerUI : MonoBehaviour
             return;
         }
 
-        float baseFirerate = HeroesManager.Instance.GetHeroFirerate(characterIndex);
+        float baseFirerate = HeroesManager.Instance.GetHeroFirerate(HeroesManager.Instance.currentActiveSelectedHeroIndex);
         float abilitiesSlotFirerateBonus = SlotAblitiesManager.instance.all_AbilitesInventoryItems[SlotAblitiesManager.instance.currentEquippmentSelectedIndex].currentFirerate;
 
+        if (PlayerSlotManager.instance.isAnythingItemEquipped)
+        {
+            abilitiesSlotFirerateBonus += SlotAnythingManager.instance.all_AnythingInventoryItems[SlotAnythingManager.instance.currentEquippmentSelectedIndex].currentFirerate;
+        }
+
         float totalFirearate = baseFirerate + abilitiesSlotFirerateBonus;
-        txt_Firerate.text = totalFirearate.ToString();
+        txt_Firerate.text = totalFirearate.ToString("F0");
     }
 
 
@@ -148,10 +228,11 @@ public class PlayerManagerUI : MonoBehaviour
 
     public void OnClick_OpenHeroSelectionPanel()
     {
-        print("Hero Set");
-        //playerUpgradePenal.transform.DOScale(new Vector3(1, 1, 1), openMenuAnimationDuration).SetEase(Ease.OutBounce);
-        HeroesManager.Instance.ActiveCurrentHero(1);
-        //activeHeroStateUI.SetActiveHeroState(1);
+        for(int i =0; i < all_HerosModel.Length; i++)
+        {
+            all_HerosModel[i].SetActive(false);
+        }
+        ui_HeroSelection.gameObject.SetActive(true);
     }
 
     public void OnClick_OpenInventoryPanel()

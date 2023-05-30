@@ -43,17 +43,12 @@ public class SlotGunsManager : MonoBehaviour
         return false;
     }
 
-
-    public void SetLevelData()
+    public float SetDamagePer(int _slotIndex)
     {
-        if (all_GunInventoryItems[currentEquippmentSelectedIndex].currentLevel > 1)
-        {
-            for (int i = 0; i < all_GunInventoryItems[currentEquippmentSelectedIndex].currentLevel; i++)
-            {
-                all_GunInventoryItems[currentEquippmentSelectedIndex].currentDamage += all_GunInventoryItems[currentEquippmentSelectedIndex].damageIncrease;
-            }
-        }
+        float perDamage = all_GunInventoryItems[_slotIndex].currentDamage * (all_GunInventoryItems[_slotIndex].damageIncrease / 100f);
+        return perDamage;
     }
+
 
 
     public void UpgradeEquipnent(int _itemIndex)

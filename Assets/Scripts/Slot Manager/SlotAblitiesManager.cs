@@ -44,17 +44,6 @@ public class SlotAblitiesManager : MonoBehaviour
     }
 
 
-    public void SetLevelData()
-    {
-        if (all_AbilitesInventoryItems[currentEquippmentSelectedIndex].currentLevel > 1)
-        {
-            for (int i = 0; i < all_AbilitesInventoryItems[currentEquippmentSelectedIndex].currentLevel; i++)
-            {
-                all_AbilitesInventoryItems[currentEquippmentSelectedIndex].currentFirerate += all_AbilitesInventoryItems[currentEquippmentSelectedIndex].firerateIncrease;
-            }
-        }
-    }
-
     public void UpgradeEquipnent(int _itemIndex)
     {
         currentMaterialCount -= all_AbilitesInventoryItems[_itemIndex].requireMaterialToLevelUp[all_AbilitesInventoryItems[_itemIndex].currentLevel];

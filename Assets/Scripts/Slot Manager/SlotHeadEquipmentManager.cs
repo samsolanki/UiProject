@@ -43,6 +43,11 @@ public class SlotHeadEquipmentManager : MonoBehaviour
     }
 
 
+    public float SetHealthPer(int _slotIndex)
+    {
+        float perHealth = all_HeadInventory[_slotIndex].currentHealth * (all_HeadInventory[_slotIndex].healthIncrease / 100f);
+        return perHealth;
+    }
 
     public void UpgradeEquipnent(int _itemIndex)
     {

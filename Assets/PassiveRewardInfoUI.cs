@@ -8,8 +8,6 @@ using DG.Tweening;
 public class PassiveRewardInfoUI : MonoBehaviour
 {
 
-    [SerializeField] private GameObject passiveUpgradeSelection;
-
     [SerializeField] private Image img_PassiveUpgradeIcon;
     [SerializeField] private Image img_PassiveUpgradeLevelIcon;
     [SerializeField] private TextMeshProUGUI text_PassiveUpgradeName;
@@ -19,49 +17,9 @@ public class PassiveRewardInfoUI : MonoBehaviour
 
     [SerializeField] private float fadeAnimationDuration = 0.5f;
 
-    private PassiveUpgradeUI passiveUpgradeUI;
-
     private void OnEnable()
     {
         PassiveUpgradePanelAnimationStart();
-    }
-
-
-    private void Start()
-    {
-        passiveUpgradeUI = GetComponentInParent<PassiveUpgradeUI>();
-    }
-
-    public void SetRewardPanelInfo(int _rewardedPassiveIndex)
-    {
-        PassiveUpgradeManager.Instance.IncreasePassiveUpgradeCurrentLevel(_rewardedPassiveIndex);
-        img_PassiveUpgradeLevelIcon.GetComponentInChildren<TextMeshProUGUI>().text = PassiveUpgradeManager.Instance.GetCurrentPassivesLevel(_rewardedPassiveIndex).ToString();
-        text_PassiveUpgradeLevel.text = "Level " + PassiveUpgradeManager.Instance.GetCurrentPassivesLevel(_rewardedPassiveIndex).ToString();
-        text_PassiveUpgradeName.text = PassiveUpgradeManager.Instance.GetCurrentPassiveUpgradeName(_rewardedPassiveIndex);
-        text_PassiveUpgradeDesc.text = PassiveUpgradeManager.Instance.GetCurrentPassiveUpgradeDesc(_rewardedPassiveIndex);
-    }
-
-    
-
-    private void ResetAllPanels()
-    {
-        // alpha 0 for all images
-
-        //image.sprites
-        /*Color tempColor = img_PassiveUpgradeIcon.color;
-        tempColor.a = 0;
-        img_PassiveUpgradeIcon.color = tempColor;
-
-        Color tempText = text_PassiveUpgradeName.color;
-        tempText.a = 0;
-        text_PassiveUpgradeName.color = tempText;*/
-
-        img_PassiveUpgradeIcon.DOFade(0, 0.01f);
-        text_PassiveUpgradeName.DOFade(0, 0.01f);
-        text_PassiveUpgradeLevel.DOFade(0, 0.01f);
-        text_PassiveUpgradeDesc.DOFade(0, 0.01f);
-        continueButton.DOFade(0, 0.01f);
-
     }
 
     //START PASSIVE REWARDED PANEL ANIMATION
@@ -76,16 +34,35 @@ public class PassiveRewardInfoUI : MonoBehaviour
             Append(continueButton.DOFade(1, fadeAnimationDuration));
     }
 
+    private void ResetAllFieldsAnimations()
+    {
+        img_PassiveUpgradeIcon.DOFade(0, 0.01f);
+        text_PassiveUpgradeName.DOFade(0, 0.01f);
+        text_PassiveUpgradeLevel.DOFade(0, 0.01f);
+        text_PassiveUpgradeDesc.DOFade(0, 0.01f);
+        continueButton.DOFade(0, 0.01f);
+
+    }
+
+    public void SetRewardPanelInfo(int _rewardedPassiveIndex)
+    {
+        PassiveUpgradeManager.Instance.IncreasePassiveUpgradeCurrentLevel(_rewardedPassiveIndex);
+        img_PassiveUpgradeLevelIcon.GetComponentInChildren<TextMeshProUGUI>().text = PassiveUpgradeManager.Instance.GetCurrentPassivesLevel(_rewardedPassiveIndex).ToString();
+        text_PassiveUpgradeLevel.text = "Level " + PassiveUpgradeManager.Instance.GetCurrentPassivesLevel(_rewardedPassiveIndex).ToString();
+        text_PassiveUpgradeName.text = PassiveUpgradeManager.Instance.GetCurrentPassiveUpgradeName(_rewardedPassiveIndex);
+        text_PassiveUpgradeDesc.text = PassiveUpgradeManager.Instance.GetCurrentPassiveUpgradeDesc(_rewardedPassiveIndex);
+    }
+
     public void OnClick_ContinueButton()
     {
-        ResetAllPanels();
+        ResetAllFieldsAnimations();
 
-        for (int i = 0; i < passiveUpgradeUI.AllGlowBG.Length; i++)
+        for (int i = 0; i < UiManager.instance.ui_PassiveUpgrade.ui_PassiveUpgradeSelection.AllGlowBG.Length; i++)
         {
-            passiveUpgradeUI.AllGlowBG[i].gameObject.SetActive(false);
+            UiManager.instance.ui_PassiveUpgrade.ui_PassiveUpgradeSelection.AllGlowBG[i].gameObject.SetActive(false);
         }
-        passiveUpgradeUI.SetPassiveUpgradeLevelText();
-        passiveUpgradeSelection.SetActive(true);
+        UiManager.instance.ui_PassiveUpgrade.ui_PassiveUpgradeSelection.SetPassiveUpgradeLevelText();
+        UiManager.instance.ui_PassiveUpgrade.ui_PassiveUpgradeSelection.gameObject.SetActive(true);
         this.gameObject.SetActive(false);
     }
 }

@@ -44,17 +44,6 @@ public class SlotGlovesManager : MonoBehaviour
     }
 
 
-    public void SetLevelData()
-    {
-        if (all_GlovesInventoryItems[currentEquippmentSelectedIndex].currentLevel > 1)
-        {
-            for (int i = 0; i < all_GlovesInventoryItems[currentEquippmentSelectedIndex].currentLevel; i++)
-            {
-                all_GlovesInventoryItems[currentEquippmentSelectedIndex].currentDamage += all_GlovesInventoryItems[currentEquippmentSelectedIndex].damageIncrease;
-            }
-        }
-    }
-
     public void UpgradeEquipnent(int _itemIndex)
     {
         currentMaterialCount -= all_GlovesInventoryItems[_itemIndex].requireMaterialToLevelUp[all_GlovesInventoryItems[_itemIndex].currentLevel];

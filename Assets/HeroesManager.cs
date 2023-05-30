@@ -5,61 +5,80 @@ using UnityEngine;
 public class HeroesManager : MonoBehaviour
 {
     public static HeroesManager Instance;
-    [SerializeField] private Transform activeHeroParent;
 
-    public int currentlyActiveHero; // currentActiveSelectedHero
+    public int currentActiveSelectedHeroIndex; // currentActiveSelectedHero
 
-    [SerializeField] private Vector3 v3_HeroPositionOffset;
+    public int heroMaxLevel;
+
     public HeroData[] all_HeroData;
-    public GameObject[] all_HerosModels;
 
 
     private void Awake()
     {
         Instance = this;
-
-
-        ActiveCurrentHero(currentlyActiveHero);
     }
 
 
-
-    public void SetActiveHero()
+    public float SetHealthDataVisPer(int _heroIndex)
     {
-
+        float perHealth = all_HeroData[_heroIndex].flt_MaxHealth * (all_HeroData[_heroIndex].flt_UpgradeHealth / 100f);
+        return perHealth;
     }
 
-    public void GetActiveHero()
+    public float SetHeroDamagePer(int _heroIndex)
     {
-
+        float perDamage = all_HeroData[_heroIndex].flt_Damage * (all_HeroData[_heroIndex].flt_UpgradeDamage / 100f);
+        return perDamage;
     }
 
-
-
-
-    public void ActiveCurrentHero(int _heroIndex)
+    public float SetHeroFireratePer(int _heroIndex)
     {
-        for (int i = 0; i < all_HeroData.Length; i++)
+        float perDamage = all_HeroData[_heroIndex].flt_FireRate * (all_HeroData[_heroIndex].flt_UpgradeFirerate / 100f);
+        return perDamage;
+    }
+
+    public bool hasEnoughCardsToUpgrade(int _heroIndex)
+    {
+        if(all_HeroData[_heroIndex].currentCards >= all_HeroData[_heroIndex].requireCardsToUnlock)
         {
-            if (i == _heroIndex)
-            {
-                all_HeroData[_heroIndex].gameObject.SetActive(true);
-            }
-            else
-            {
-                all_HeroData[i].gameObject.SetActive(false);
-            }
-
+            return true;
         }
+        return false;
+    }
+
+    public bool hasEnoughCoinsToUpgrade(int _heroIndex)
+    {
+        if(DataManager.instance.coins >= all_HeroData[_heroIndex].coinsForUpgrade)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IsHeroReachMaxLevel(int _heroIndex)
+    {
+        if(all_HeroData[_heroIndex].currentLevel == heroMaxLevel)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void UpgradeSelectedHero(int _selectedHeroIndex)
+    {
+        print("Upgrade Herp");
+        all_HeroData[_selectedHeroIndex].currentCards -= all_HeroData[_selectedHeroIndex].requireCardsToUnlock;
+        DataManager.instance.coins -= all_HeroData[_selectedHeroIndex].coinsForUpgrade;
+        all_HeroData[_selectedHeroIndex].currentLevel++;
+        all_HeroData[_selectedHeroIndex].flt_MaxHealth += SetHealthDataVisPer(_selectedHeroIndex);
+        all_HeroData[_selectedHeroIndex].flt_Damage += SetHeroDamagePer(_selectedHeroIndex);
+        all_HeroData[_selectedHeroIndex].flt_FireRate += SetHeroFireratePer(_selectedHeroIndex);
     }
 
 
     // GETTER FOR PROFILE
-
-    public int GetHeroId(int _heroIndex)
-    {
-        return all_HeroData[_heroIndex].heroID;
-    }
 
     public int GetHeroLevel(int _heroIndex)
     {
@@ -71,6 +90,10 @@ public class HeroesManager : MonoBehaviour
         return all_HeroData[_heroIndex].str_HeroName;
     }
 
+    public string GetHeroDescription(int _heroIndex)
+    {
+        return all_HeroData[_heroIndex].str_HeroDescription;
+    }
 
     //GETTER FOR STATES
 

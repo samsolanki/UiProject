@@ -7,8 +7,9 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
 
 
-    public HomeUI homeUi; // ui_Home
-    public SettingUI settingUI; // ui_Settings
+    public HomeUI ui_Home; // ui_Home
+    public SettingUI ui_Setting; // ui_Settings
+    public PassiveUpgradeUI ui_PassiveUpgrade;
     public RewardSummaryUI rewardSummaryUI; // ui_RewardSummary
     public PlayerManagerUI ui_PlayerManager; 
 

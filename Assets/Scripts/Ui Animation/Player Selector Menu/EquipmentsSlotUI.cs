@@ -189,9 +189,6 @@ public class EquipmentsSlotUI : MonoBehaviour
             .currentLevel.ToString();
         txt_GunCurrentLevel.gameObject.SetActive(true);
 
-
-        //SET LEVEL DATA WHEN SLOT LEVEL IS GATHER THEN 1
-        SlotGunsManager.instance.SetLevelData();
         // Check For Updgrade
         CheckIfUpgradeAvailableForEquippedGunItem();
     }
@@ -316,10 +313,6 @@ public class EquipmentsSlotUI : MonoBehaviour
 
 
 
-        //SET LEVEL DATA WHEN SLOT LEVEL IS GATHER THEN 1
-        SlotGlovesManager.instance.SetLevelData();
-
-
         // Check For Updgrade
         CheckIfUpgradeAvailableForEquippedGlovesItem();
     }
@@ -384,10 +377,6 @@ public class EquipmentsSlotUI : MonoBehaviour
         txt_AnythingCurrentLevel.gameObject.SetActive(true);
 
 
-
-        //SET LEVEL DATA WHEN SLOT LEVEL IS GATHER THEN 1
-        SlotAnythingManager.instance.SetLevelData();
-
         // Check For Updgrade
         CheckIfUpgradeAvailableForEquippedAnythingItem();
     }
@@ -447,9 +436,6 @@ public class EquipmentsSlotUI : MonoBehaviour
             .currentLevel.ToString();
         txt_AblitiesCurrentLevel.gameObject.SetActive(true);
 
-
-        //SET LEVEL DATA WHEN SLOT LEVEL IS GATHER THEN 1
-        SlotAblitiesManager.instance.SetLevelData();
         // Check For Updgrade
         CheckIfUpgradeAvailableForEquippedAbilitiesItem();
     }

@@ -49,10 +49,10 @@ public class TimeCalculation : MonoBehaviour
         if(currentExpeditionOneTimer <= 0)
         {
             currentExpeditionOneTimer = expeditionOneTimer;
-            UiManager.instance.homeUi.CompleteExpaditionOne();
+            UiManager.instance.ui_Home.CompleteExpaditionOne();
 
         }
-        UiManager.instance.homeUi.ExpeditionOneTimer(currentExpeditionOneTimer);
+        UiManager.instance.ui_Home.ExpeditionOneTimer(currentExpeditionOneTimer);
     }
     public void ResetExpeditionOneTimer()
     {
@@ -70,10 +70,10 @@ public class TimeCalculation : MonoBehaviour
         if (currentExpeditionTwoTimer <= 0)
         {
             currentExpeditionTwoTimer = expeditionOneTimer;
-            UiManager.instance.homeUi.CompleteExpeditionTwo();
+            UiManager.instance.ui_Home.CompleteExpeditionTwo();
 
         }
-        UiManager.instance.homeUi.ExpeditionTwoTimer(currentExpeditionTwoTimer);
+        UiManager.instance.ui_Home.ExpeditionTwoTimer(currentExpeditionTwoTimer);
     }
     
     public void ResetExpeditionTwoTimer()

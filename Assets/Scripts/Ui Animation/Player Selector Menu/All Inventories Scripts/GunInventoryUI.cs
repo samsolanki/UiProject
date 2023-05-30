@@ -28,7 +28,6 @@ public class GunInventoryUI : MonoBehaviour
 
     public void OnClick_Object(int index)
     {
-        print(index);
         this.gameObject.SetActive(false);
         gunInventoryEquipAndUpgradeUI.gameObject.SetActive(true);
         gunInventoryEquipAndUpgradeUI.SetHeadEquipAndUpgradePanel(index);

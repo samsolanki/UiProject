@@ -30,10 +30,10 @@ public class UpgradeSelectorPenal : MonoBehaviour
 
     public void SetPassiveUpdateData()
     {
-        PassiveUpgradeManager.Instance.IncreasePassiveUpgradeCurrentLevel(upgradePenal.SelectedPowerupIndex);
-        text_PassiveUpgradeLevel.text = "Level " + PassiveUpgradeManager.Instance.GetCurrentPassivesLevel(upgradePenal.SelectedPowerupIndex).ToString();
-        text_PassiveUpgradeName.text = PassiveUpgradeManager.Instance.GetCurrentPassiveUpgradeName(upgradePenal.SelectedPowerupIndex);
-        text_PassiveUpgradeDesc.text = PassiveUpgradeManager.Instance.GetCurrentPassiveUpgradeDesc(upgradePenal.SelectedPowerupIndex);
+        PassiveUpgradeManager.Instance.IncreasePassiveUpgradeCurrentLevel(UiManager.instance.ui_PassiveUpgrade.ui_PassiveUpgradeSelection.SelectedPowerupIndex);
+        text_PassiveUpgradeLevel.text = "Level " + PassiveUpgradeManager.Instance.GetCurrentPassivesLevel(UiManager.instance.ui_PassiveUpgrade.ui_PassiveUpgradeSelection.SelectedPowerupIndex).ToString();
+        text_PassiveUpgradeName.text = PassiveUpgradeManager.Instance.GetCurrentPassiveUpgradeName(UiManager.instance.ui_PassiveUpgrade.ui_PassiveUpgradeSelection.SelectedPowerupIndex);
+        text_PassiveUpgradeDesc.text = PassiveUpgradeManager.Instance.GetCurrentPassiveUpgradeDesc(UiManager.instance.ui_PassiveUpgrade.ui_PassiveUpgradeSelection.SelectedPowerupIndex);
 
         //PassiveUpgradePanelAnimationStart();
     }

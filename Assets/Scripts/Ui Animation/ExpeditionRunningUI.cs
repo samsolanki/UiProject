@@ -93,7 +93,7 @@ public class ExpeditionRunningUI : MonoBehaviour
 
     public void OnClick_FinishExpeditionOne()
     {
-        UiManager.instance.homeUi.CompleteExpaditionOne();
+        UiManager.instance.ui_Home.CompleteExpaditionOne();
         this.gameObject.SetActive(false);
         expaditionScreen.gameObject.SetActive(false);
         DataManager.instance.all_ExpeditionRunningStatus[0] = false;
@@ -107,7 +107,7 @@ public class ExpeditionRunningUI : MonoBehaviour
 
     public void OnClick_FinishExpeditionTwo()
     {
-        UiManager.instance.homeUi.CompleteExpeditionTwo();
+        UiManager.instance.ui_Home.CompleteExpeditionTwo();
         this.gameObject.SetActive(false);
         expaditionScreen.gameObject.SetActive(false);
         DataManager.instance.all_ExpeditionRunningStatus[1] = false;

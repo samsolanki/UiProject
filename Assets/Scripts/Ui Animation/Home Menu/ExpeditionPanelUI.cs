@@ -61,8 +61,8 @@ public class ExpeditionPanelUI : MonoBehaviour
         {
             TimeCalculation.instance.currentExpeditionOneTimer = TimeCalculation.instance.expeditionOneTimer;
 
-            UiManager.instance.homeUi.expeditionOneState = ExpeditionOneState.running;
-            UiManager.instance.homeUi.CheckExpeditionOneState();
+            UiManager.instance.ui_Home.expeditionOneState = ExpeditionOneState.running;
+            UiManager.instance.ui_Home.CheckExpeditionOneState();
             DataManager.instance.all_ExpeditionRunningStatus[0] = true;
             DataManager.instance.expeditionOneIndex = _Index;
             this.gameObject.SetActive(false);
@@ -74,8 +74,8 @@ public class ExpeditionPanelUI : MonoBehaviour
         else if(myPanelId == 1) { 
 
             TimeCalculation.instance.currentExpeditionTwoTimer = TimeCalculation.instance.expeditionTwoTimer;
-            UiManager.instance.homeUi.expeditionTwoState = ExpeditionTwoState.running;
-            UiManager.instance.homeUi.CheckExpeditionTwoState();
+            UiManager.instance.ui_Home.expeditionTwoState = ExpeditionTwoState.running;
+            UiManager.instance.ui_Home.CheckExpeditionTwoState();
             DataManager.instance.all_ExpeditionRunningStatus[1] = true;
             DataManager.instance.expeditionTwoIndex = _Index;
             this.gameObject.SetActive(false);

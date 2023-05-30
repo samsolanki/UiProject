@@ -43,18 +43,6 @@ public class SlotAnythingManager : MonoBehaviour
         return false;
     }
 
-
-    public void SetLevelData()
-    {
-        if (all_AnythingInventoryItems[currentEquippmentSelectedIndex].currentLevel > 1)
-        {
-            for (int i = 0; i < all_AnythingInventoryItems[currentEquippmentSelectedIndex].currentLevel; i++)
-            {
-                all_AnythingInventoryItems[currentEquippmentSelectedIndex].currentFirerate += all_AnythingInventoryItems[currentEquippmentSelectedIndex].firerateIncrease;
-            }
-        }
-    }
-
     public void UpgradeEquipnent(int _itemIndex)
     {
         currentMaterialCount -= all_AnythingInventoryItems[_itemIndex].requireMaterialToLevelUp[all_AnythingInventoryItems[_itemIndex].currentLevel];
